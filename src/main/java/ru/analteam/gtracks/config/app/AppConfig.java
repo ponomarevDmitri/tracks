@@ -77,7 +77,7 @@ public class AppConfig {
 
     private Properties jpaProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
 //        prop.put("hibernate.format_sql", "true");
 //        prop.put("hibernate.show_sql", "true");

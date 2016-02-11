@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import ru.analteam.gtracks.service.security.UserDetailsServiceImpl;
 
 /**
@@ -25,8 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(userDetailsService)
-            .passwordEncoder(getShaPasswordEncoder());
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(getShaPasswordEncoder());
     }
 
     @Autowired
@@ -40,6 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin") // #2
                 .password("password")
                 .roles("ADMIN", "USER");
+    }
+
+    @Bean
+    public SavedRequestAwareAuthenticationSuccessHandler successHandler() {
+        SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+//        successHandler.setTargetUrlParameter("/secure/");
+        return successHandler;
     }
 
     @Override
@@ -61,6 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/j_spring_security_check")
                         // указываем URL при неудачном логине
                 .failureUrl("/login?error")
+                .defaultSuccessUrl("/index")
+                .successHandler(successHandler())
                         // Указываем параметры логина и пароля с формы логина
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
@@ -85,7 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Указываем Spring контейнеру, что надо инициализировать <b></b>ShaPasswordEncoder
     // Это можно вынести в WebAppConfig, но для понимаемости оставил тут
     @Bean
-    public ShaPasswordEncoder getShaPasswordEncoder(){
+    public ShaPasswordEncoder getShaPasswordEncoder() {
         return new ShaPasswordEncoder();
     }
 }
