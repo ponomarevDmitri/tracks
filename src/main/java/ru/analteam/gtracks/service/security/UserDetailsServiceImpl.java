@@ -2,6 +2,8 @@ package ru.analteam.gtracks.service.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,12 +26,14 @@ import java.util.List;
  * Created by dima-pc on 06.02.2016.
  */
 @Service
-@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @PersistenceContext(type = PersistenceContextType.EXTENDED)
     EntityManager em;
     Converter<SecUser, User> secUser2UserConverter;
+
+//    @Autowired
+//    private ShaPasswordEncoder passwordEncoder; //todo initiate
 
     public UserDetailsServiceImpl() {
         secUser2UserConverter = new SecUser2UserConverter(new SecRole2GrantedAuthorityConverter());

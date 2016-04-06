@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<h1>SOME user PAGE</h1>
+<h1>SOME ADMIN PAGE</h1>
 
 </body>
 </html>

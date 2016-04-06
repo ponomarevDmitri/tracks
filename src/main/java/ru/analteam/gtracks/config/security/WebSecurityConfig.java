@@ -27,7 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(getShaPasswordEncoder());
+//                .passwordEncoder(getShaPasswordEncoder());
+                ;
     }
 
     @Autowired
@@ -46,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public SavedRequestAwareAuthenticationSuccessHandler successHandler() {
         SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+//        successHandler = new AuSu
 //        successHandler.setTargetUrlParameter("/secure/");
         return successHandler;
     }
@@ -70,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         // указываем URL при неудачном логине
                 .failureUrl("/login?error")
                 .defaultSuccessUrl("/index")
-                .successHandler(successHandler())
+//                .successHandler(successHandler())
                         // Указываем параметры логина и пароля с формы логина
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
@@ -89,13 +91,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         http.authorizeRequests().antMatchers("/**").access("hasRole('ROLE_USER')")
-                .and().formLogin(); /*.usernameParameter("j_username").passwordParameter("j_password");*/
+//                .and().formLogin(); /*.usernameParameter("j_username").passwordParameter("j_password");*/
+                ; /*.usernameParameter("j_username").passwordParameter("j_password");*/
     }
 
     // Указываем Spring контейнеру, что надо инициализировать <b></b>ShaPasswordEncoder
     // Это можно вынести в WebAppConfig, но для понимаемости оставил тут
-    @Bean
-    public ShaPasswordEncoder getShaPasswordEncoder() {
-        return new ShaPasswordEncoder();
-    }
+//    @Bean
+//    public ShaPasswordEncoder getShaPasswordEncoder() {
+//        return new ShaPasswordEncoder();
+//    }
 }

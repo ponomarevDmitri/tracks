@@ -57,21 +57,22 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         FreeMarkerViewResolver viewResolver
                 = new FreeMarkerViewResolver();
         viewResolver.setViewClass(FreeMarkerView.class);
+
 //        viewResolver.setPrefix("/WEB-INF/pages/ftl/");
         viewResolver.setSuffix(".ftl");
         return viewResolver;
     }
 
 
-//    @Bean
-//    public UrlBasedViewResolver setupViewResolver() {
-//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-//        resolver.setPrefix("/pages/");
-//        resolver.setSuffix(".jsp");
-//        resolver.setViewClass(JstlView.class);
-//
-//        return resolver;
-//    }
+    /*@Bean
+    public UrlBasedViewResolver setupViewResolver() {
+        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+        resolver.setPrefix("/pages/");
+        resolver.setSuffix(".jsp");
+        resolver.setViewClass(JstlView.class);
+
+        return resolver;
+    }*/
 
 }
 

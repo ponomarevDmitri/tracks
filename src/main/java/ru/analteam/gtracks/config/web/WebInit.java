@@ -18,6 +18,7 @@ import javax.servlet.ServletRegistration;
  */
 public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{ WebSecurityConfig.class, AppConfig.class};

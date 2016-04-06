@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <body>
 
@@ -7,6 +8,34 @@
 <p>My first paragraph.</p>
 
 <p>authentified!!</p>
+<#list 1..10 as x>
+${x}
+</#list>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <form action="/j_spring_security_check" method="post">
     <h2 class="form-signin-heading">Please sign in</h2>

@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.analteam.gtracks.config.web.WebConfig;
 
 import javax.activation.DataSource;
@@ -28,6 +29,7 @@ import java.util.Properties;
  */
 @Configuration
 //@Import(WebConfig.class)
+@EnableTransactionManagement
 @ComponentScan({"ru.analteam.gtracks.service"})
 public class AppConfig {
 
@@ -69,7 +71,8 @@ public class AppConfig {
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         emf.setJpaProperties(jpaProperties());
         emf.setPackagesToScan(new String[]{
-                "ru.analteam.gtracks.model.security"
+                "ru.analteam.gtracks.model.security",
+                "ru.analteam.gtracks.model.test"
         });
 
         return emf;
