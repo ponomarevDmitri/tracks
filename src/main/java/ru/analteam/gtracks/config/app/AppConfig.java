@@ -1,27 +1,15 @@
 package ru.analteam.gtracks.config.app;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.hibernate.SessionFactory;
-import org.hibernate.internal.SessionFactoryImpl;
-import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
-import org.omg.CORBA.OBJECT_NOT_EXIST;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import ru.analteam.gtracks.config.web.WebConfig;
 
-import javax.activation.DataSource;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.TransactionManager;
 import java.util.Properties;
 
 /**
@@ -30,7 +18,7 @@ import java.util.Properties;
 @Configuration
 //@Import(WebConfig.class)
 @EnableTransactionManagement
-@ComponentScan({"ru.analteam.gtracks.service"})
+@ComponentScan({"ru.analteam.gtracks.service", "ru.analteam.gtracks.repository"})
 public class AppConfig {
 
     /*@Bean
@@ -70,10 +58,11 @@ public class AppConfig {
         emf.setDataSource(dataSource());
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         emf.setJpaProperties(jpaProperties());
-        emf.setPackagesToScan(new String[]{
+
+        emf.setPackagesToScan(
                 "ru.analteam.gtracks.model.security",
                 "ru.analteam.gtracks.model.test"
-        });
+        );
 
         return emf;
     }

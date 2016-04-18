@@ -74,7 +74,7 @@ public class SecUser {
         this.password = password;
     }
 
-    @ManyToMany(targetEntity = SecRole.class)
+    @ManyToMany(targetEntity = SecRole.class, fetch = FetchType.EAGER)
     public List<SecRole> getRoles() {
         return roles;
     }

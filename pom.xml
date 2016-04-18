@@ -138,6 +138,14 @@
             <version>1.2.17</version>
         </dependency>
 
+        <!--code style and validation-->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+
     </dependencies>
     
 </project>
