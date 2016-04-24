@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
 
-        http.authorizeRequests().antMatchers("/login/**").access("hasRole('ROLE_USER')")
+        http.authorizeRequests().antMatchers("/pages/**").access("hasRole('ROLE_USER')")
 //                .and().formLogin(); /*.usernameParameter("j_username").passwordParameter("j_password");*/
                 ; /*.usernameParameter("j_username").passwordParameter("j_password");*/
     }

@@ -1,5 +1,6 @@
 package ru.analteam.gtracks.config.app;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -82,6 +83,14 @@ public class AppConfig {
         JpaTransactionManager tm = new JpaTransactionManager();
         tm.setEntityManagerFactory(entityManagerFactory().getObject());
         return tm;
+    }
+
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setDataSource(dataSource());
+        liquibase.setChangeLog("classpath:liquibase/db_changelog.xml");
+        return liquibase;
     }
 }
 
