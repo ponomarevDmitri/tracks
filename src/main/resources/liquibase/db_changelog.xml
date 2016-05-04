@@ -14,5 +14,5 @@
         </createTable>
     </changeSet>-->
     
-    <!--<include file=""-->
+    <include file="liquibase/v000/init_db_changelog.xml"/>
 </databaseChangeLog>

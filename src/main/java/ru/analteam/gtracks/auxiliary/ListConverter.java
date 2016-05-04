@@ -8,5 +8,5 @@ import java.util.List;
  * Created by dima-pc on 10.02.2016.
  */
 public interface ListConverter<S, T> extends Converter<S, T> {
-    public List<T> convert(List<S> sourceList);
+    List<T> convert(List<S> sourceList);
 }
