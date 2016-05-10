@@ -53,6 +53,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         FreeMarkerViewResolver viewResolver
                 = new FreeMarkerViewResolver();
         viewResolver.setViewClass(FreeMarkerView.class);
+        viewResolver.setContentType("text/html;charset=UTF-8");
 
 //        viewResolver.setPrefix("/WEB-INF/pages/ftl/");
         viewResolver.setSuffix(".ftl");

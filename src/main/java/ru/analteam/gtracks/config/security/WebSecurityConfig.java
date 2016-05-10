@@ -89,9 +89,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
 
-        http.authorizeRequests().antMatchers("/pages/**").access("hasRole('ROLE_USER')")
-//                .and().formLogin(); /*.usernameParameter("j_username").passwordParameter("j_password");*/
-                ; /*.usernameParameter("j_username").passwordParameter("j_password");*/
+        http.authorizeRequests().antMatchers("/**").authenticated()//access("hasRole('ROLE_USER')")
+                .and().formLogin().usernameParameter("j_username").passwordParameter("j_password");
+
+        http.authorizeRequests().antMatchers("index/adminIndex").access("hasRole('ROLE_ADMIN')");
+//                .and().formLogin().usernameParameter("j_username").passwordParameter("j_password");//.defaultSuccessUrl("/index");
+//        http.authorizeRequests().antMatchers("/**").permitAll()
+//                .and().formLogin().usernameParameter("j_username").passwordParameter("j_password");
+//                ; .usernameParameter("j_username").passwordParameter("j_password");
     }
 
     // ”казываем Spring контейнеру, что надо инициализировать <b></b>ShaPasswordEncoder
