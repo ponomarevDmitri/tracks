@@ -38,6 +38,57 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         return viewResolver;
     }*/
 
+
+   /* @Bean
+    public FreeMarkerConfigurationFactory freeMarkerConfigurationFactory() {
+        FreeMarkerConfigurationFactoryBean configurationFactoryBean = new FreeMarkerConfigurationFactoryBean();
+        configurationFactoryBean.setTemplateLoaderPath("/WEB-INF/pages/ftl/");
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("xml_escape", new XmlEscape());
+        configurationFactoryBean.setFreemarkerVariables(map);
+
+        Properties settings = new Properties();
+        settings.setProperty("cache_storage", NullCacheStorage.class.getName());
+        configurationFactoryBean.setFreemarkerSettings(settings);
+        return configurationFactoryBean;
+    }
+
+
+
+
+
+
+
+    */
+
+/*    @Bean(name ="freemarkerConfig")
+    public FreeMarkerConfigurer freemarkerConfig() throws IOException, TemplateException {
+//        FreeMarkerConfigurationFactory configurationFactory = new FreeMarkerConfigurationFactoryBean();
+//        configurationFactory.set
+
+
+
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+
+*//*
+        configurer.setTemplateLoaderPath("/WEB-INF/pages/ftl/");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("xml_escape", new XmlEscape());
+
+        configurer.setFreemarkerVariables(map);
+*//*
+
+//        freemarker.template.Configuration configuration = new freemarker.template.Configuration(new Version("2.3.23"));
+//        configurer.setConfiguration(freeMarkerConfigurationFactory().createConfiguration());
+//        configuration.setCacheStorage(new NullCacheStorage());
+//        configuration.setLoad
+//        configurer.setConfiguration(configuration);
+//        configurer.getConfiguration().setTemplateUpdateDelayMilliseconds(1000l);
+
+        return configurer;
+    }*/
+
     @Bean(name ="freemarkerConfig")
     public FreeMarkerConfigurer freemarkerConfig() {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();

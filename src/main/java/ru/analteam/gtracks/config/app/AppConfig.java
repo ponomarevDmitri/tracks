@@ -128,7 +128,8 @@ public class AppConfig {
         return tm;
     }
 
-    @Bean
+//    todo make COnditional
+//    @Bean
     public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource());

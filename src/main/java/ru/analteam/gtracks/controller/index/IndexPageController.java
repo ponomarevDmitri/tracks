@@ -1,16 +1,15 @@
 package ru.analteam.gtracks.controller.index;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
+import ru.analteam.gtracks.model.security.SecUser;
+import ru.analteam.gtracks.service.user.UserService;
 
-import javax.servlet.ServletContext;
 import java.util.Collection;
 
 /**
@@ -22,6 +21,9 @@ public class IndexPageController {
     
     private static final String ADMIN_AUTHORITY_NAME = "ROLE_ADMIN";
 
+    @Autowired
+    private UserService userService;
+
     //may need to use ServletContext context
     @RequestMapping("/index")
     public ModelAndView index(@AuthenticationPrincipal UserDetails userDetails){
@@ -31,12 +33,14 @@ public class IndexPageController {
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
 
         if (isAdmin(authorities)) {
-            viewName = "index/adminIndex";
+            viewName = "admin/index";
         } else {
-            viewName = "index/index";
+            viewName = "user/index";
         }
 
+        SecUser user = userService.getUserByUsername(userDetails.getUsername());
         modelAndView.setViewName(viewName);
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 
