@@ -25,7 +25,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // relatively root of .war archive
-        registry.addResourceHandler("/static/**").addResourceLocations("WEB-INF/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
     /*@Bean

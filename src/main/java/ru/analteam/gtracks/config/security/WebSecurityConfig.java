@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .passwordEncoder(getShaPasswordEncoder());
         ;
     }
-
+/*
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin") // #2
                 .password("password")
                 .roles("ADMIN", "USER");
-    }
+    }*/
 
     @Bean
     public SavedRequestAwareAuthenticationSuccessHandler successHandler() {
@@ -56,12 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // включаем защиту от CSRF атак
         http.csrf()
                 .disable()
-                        // указываем правила запросов
-                        // по которым будет определятся доступ к ресурсам и остальным данным
-                .authorizeRequests()
-                .antMatchers("/resources/**", "/**").permitAll()
-                .anyRequest().permitAll()
-                .and();
+        ;
 
         http.formLogin()
                 // указываем страницу с формой логина
@@ -88,23 +83,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         // делаем не валидной текущую сессию
                 .invalidateHttpSession(true);
 
-
-//        http.authorizeRequests().antMatchers("/**").authenticated()//access("hasRole('ROLE_USER')")
-//                .and().formLogin().usernameParameter("j_username").passwordParameter("j_password");
-
-
         http.authorizeRequests()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/index/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/index").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
-
-
-
-        http.authorizeRequests().antMatchers("index/adminIndex").access("hasRole('ROLE_ADMIN')");
-//                .and().formLogin().usernameParameter("j_username").passwordParameter("j_password");//.defaultSuccessUrl("/index");
-//        http.authorizeRequests().antMatchers("/**").permitAll()
-//                .and().formLogin().usernameParameter("j_username").passwordParameter("j_password");
-//                ; .usernameParameter("j_username").passwordParameter("j_password");
     }
 
     // Указываем Spring контейнеру, что надо инициализировать <b></b>ShaPasswordEncoder
