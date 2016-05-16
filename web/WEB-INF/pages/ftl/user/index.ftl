@@ -2,6 +2,7 @@
 <html>
 <head>
     <link href="/static/assets/js/jquery/jquery-1.12.3.js">
+    <link href="/static/assets/js/app/map-manager.js">
 </head>
 <body>
 
