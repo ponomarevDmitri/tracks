@@ -129,7 +129,7 @@ public class AppConfig {
     }
 
 //    todo make COnditional
-//    @Bean
+    @Bean
     public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource());

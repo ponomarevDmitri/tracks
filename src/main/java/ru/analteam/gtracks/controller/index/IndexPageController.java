@@ -18,7 +18,7 @@ import java.util.Collection;
 @Controller
 @RequestMapping("/")
 public class IndexPageController {
-    
+     
     private static final String ADMIN_AUTHORITY_NAME = "ROLE_ADMIN";
 
     @Autowired

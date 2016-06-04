@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="/static/assets/js/jquery/jquery-1.12.3.js">
-    <link href="/static/assets/js/app/map-manager.js">
+    <script src="/static/assets/js/jquery/jquery-1.12.3.js"></script>
+    <script src="/static/assets/js/app/map-manager.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
+            async defer></script>
 </head>
 <body>
 

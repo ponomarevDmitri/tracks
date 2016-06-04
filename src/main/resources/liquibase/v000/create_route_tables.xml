@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet id="1" author="d.ponomarev">
+
+        <createTable tableName="geo_coordinate">
+
+            <column name="id" type="int" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="latitude" type="FLOAT( 10, 6 )">
+                <constraints nullable="false"/>
+            </column>
+            <column name="longitude" type="FLOAT( 10, 6 )">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+
+        <createTable tableName="route_pont">
+
+            <column name="id" type="int" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="route_id" type="int"/>
+            <column name="geo_coordinate_id" type="int"/>
+            <column name="next_route_point" type="int"/>
+
+            <column name="short_description" type="varchar(1024)"/>
+            <column name="description" type="TEXT"/>
+
+        </createTable>
+
+
+        <createTable tableName="route">
+
+            <column name="id" type="int" >
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="name" type="varchar(512)"/>
+            <column name="short_description" type="varchar(2048)"/>
+            <column name="description" type="TEXT"/>
+
+        </createTable>
+
+
+    </changeSet>
+</databaseChangeLog>

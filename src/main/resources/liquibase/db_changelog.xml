@@ -15,4 +15,5 @@
     </changeSet>-->
     
     <include file="liquibase/v000/init_db_changelog.xml"/>
+    <include file="liquibase/v000/create_route_tables.xml"/>
 </databaseChangeLog>
