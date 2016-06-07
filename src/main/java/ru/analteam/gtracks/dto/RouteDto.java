@@ -1,26 +1,16 @@
-package ru.analteam.gtracks.model.route;
-
-import javax.persistence.*;
-import java.util.List;
+package ru.analteam.gtracks.dto;
 
 /**
- * Created by dima-pc on 04.06.2016.
+ * Created by dima-pc on 07.06.2016.
  */
-@Entity
-@Table(name = "route")
-public class Route {
+public class RouteDto {
 
     private Long id;
-
-    private List<RoutePoint> routePoints;
-
     private String name;
     private String shortDescription;
     private String description;
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -29,16 +19,6 @@ public class Route {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
-    public List<RoutePoint> getRoutePoints() {
-        return routePoints;
-    }
-
-    public void setRoutePoints(List<RoutePoint> routePoints) {
-        this.routePoints = routePoints;
-    }
-
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -47,7 +27,6 @@ public class Route {
         this.name = name;
     }
 
-    @Column(name = "short_description")
     public String getShortDescription() {
         return shortDescription;
     }
@@ -56,7 +35,6 @@ public class Route {
         this.shortDescription = shortDescription;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }

@@ -30,4 +30,10 @@ public class RouteRepository implements IRouteRepository {
         }
     }
 
+    public Route create(Route route){
+        em.persist(route);
+//        route = em.merge(route);
+        return route;
+    }
+
 }

@@ -10,7 +10,7 @@
 
         <createTable tableName="geo_coordinate">
 
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="int" >
                 <constraints primaryKey="true"/>
             </column>
             <column name="latitude" type="FLOAT( 10, 6 )">
@@ -23,9 +23,9 @@
         </createTable>
 
 
-        <createTable tableName="route_pont" >
+        <createTable tableName="route_pont">
 
-            <column name="id" type="int"  autoIncrement="true">
+            <column name="id" type="int" >
                 <constraints primaryKey="true"/>
             </column>
             <column name="route_id" type="int"/>
@@ -40,7 +40,7 @@
 
         <createTable tableName="route">
 
-            <column name="id" type="int"  autoIncrement="true">
+            <column name="id" type="int" >
                 <constraints primaryKey="true"/>
             </column>
 

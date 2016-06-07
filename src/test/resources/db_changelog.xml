@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<!--
+    <property name="clob.type" value="clob" dbms="oracle"/>
+    <property name="clob.type" value="longtext" dbms="mysql"/>
+
+    <changeSet id="1" author="joe">
+        <createTable tableName="${table.name}">
+            <column name="id" type="int"/>
+            <column name="${column1.name}" type="${clob.type}"/>
+            <column name="${column2.name}" type="int"/>
+        </createTable>
+    </changeSet>-->
+    
+    <include file="liquibase/v000/init_db_changelog.xml"/>
+    <include file="liquibase/v000/create_route_tables.xml"/>
+</databaseChangeLog>

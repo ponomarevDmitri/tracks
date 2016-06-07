@@ -7,4 +7,5 @@ import ru.analteam.gtracks.model.route.Route;
  */
 public interface IRouteRepository {
     Route getRouteById(Long routeId);
+    Route create(Route route);
 }

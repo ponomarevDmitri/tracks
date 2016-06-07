@@ -105,7 +105,8 @@ public class AppConfig {
 
         emf.setPackagesToScan(
                 "ru.analteam.gtracks.model.security",
-                "ru.analteam.gtracks.model.test"
+                "ru.analteam.gtracks.model.test",
+                "ru.analteam.gtracks.model.route"
         );
 
         return emf;

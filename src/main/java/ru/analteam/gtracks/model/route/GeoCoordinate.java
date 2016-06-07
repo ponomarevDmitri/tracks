@@ -25,6 +25,14 @@ public class GeoCoordinate {
     private Double latitude;
     private Double longitude;
 
+    public GeoCoordinate(Double latitude, Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public GeoCoordinate() {
+    }
+
     @Id
     public Long getId() {
         return id;
