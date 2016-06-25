@@ -19,6 +19,7 @@ public class RoutePoint {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -37,7 +38,7 @@ public class RoutePoint {
         this.route = route;
     }
 
-    @ManyToOne(targetEntity = GeoCoordinate.class)
+    @ManyToOne(targetEntity = GeoCoordinate.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "geo_coordinate_id")
     public GeoCoordinate getGeoCoordinate() {
         return geoCoordinate;

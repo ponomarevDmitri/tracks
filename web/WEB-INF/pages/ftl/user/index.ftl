@@ -6,12 +6,22 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
             async defer></script>
+    <script>
+        initUserMap("map");
+    </script>
+    <style>
+
+        .app_map {
+            display: block;
+        }
+
+    </style>
 </head>
 <body>
 
 <h1>SOME user PAGE asd112</h1>
 
-<div class="app_map">
+<div id="map" class="app_map">
 
 </div>
 

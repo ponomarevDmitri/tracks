@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
+ * Repository for storing routes
  * Created by dima-pc on 05.06.2016.
  */
 @Repository
@@ -32,6 +33,7 @@ public class RouteRepository implements IRouteRepository {
 
     public Route create(Route route){
         em.persist(route);
+        em.flush();
 //        route = em.merge(route);
         return route;
     }

@@ -3,6 +3,7 @@ package ru.analteam.gtracks.repository;
 import liquibase.integration.spring.SpringLiquibase;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,18 +18,21 @@ import java.util.Properties;
  * Created by dima-pc on 05.06.2016.
  */
 @Configuration
+@ComponentScan(basePackages = "ru.analteam.gtracks.repository")
 public class TestContext {
     @Bean
     public javax.sql.DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
+//        ds.setDriverClassName("org.h2.Driver");
         ds.setDriverClassName("org.h2.Driver");
 
 //        ds.setUsername("root");
 //        ds.setPassword("baikal11");
 
-        ds.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
-//        ds.setUsername(dbUsername);
-//        ds.setPassword(dbPassword);
+//        ds.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
+        ds.setUrl("jdbc:mysql://localhost:3306/test_schema");
+        ds.setUsername("root");
+        ds.setPassword("baikal11");
 
         return ds;
     }
@@ -45,7 +49,8 @@ public class TestContext {
 
         emf.setPackagesToScan(
                 "ru.analteam.gtracks.model.security",
-                "ru.analteam.gtracks.model.test"
+                "ru.analteam.gtracks.model.test",
+                "ru.analteam.gtracks.model.route"
         );
 
         return emf;
@@ -58,6 +63,7 @@ public class TestContext {
 //        prop.put("hibernate.format_sql", "true");
 //        prop.put("hibernate.show_sql", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+//        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return properties;
     }
 
@@ -68,6 +74,7 @@ public class TestContext {
         return tm;
     }
 
+    @Bean
     public RouteRepository routeRepository(){
         RouteRepository routeRepository = new RouteRepository();
 

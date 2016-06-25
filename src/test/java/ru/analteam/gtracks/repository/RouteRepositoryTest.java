@@ -1,10 +1,13 @@
 package ru.analteam.gtracks.repository;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ru.analteam.gtracks.model.route.GeoCoordinate;
 import ru.analteam.gtracks.model.route.Route;
 import ru.analteam.gtracks.model.route.RoutePoint;
@@ -23,7 +26,9 @@ public class RouteRepositoryTest {
     private RouteRepository routeRepository;
 
     @Test
-    public void testCreate() throws Exception {
+    @Rollback
+    @Transactional
+    public void testCreateAndFetchCoordinates() throws Exception {
         Route route = new Route();
         List<RoutePoint> points = new ArrayList<RoutePoint>();
 
@@ -43,5 +48,11 @@ public class RouteRepositoryTest {
         route.setShortDescription("short desrciption");
 
 
+        Route createdRoute = routeRepository.create(route);
+        route = routeRepository.getRouteById(createdRoute.getId());
+
+
+        Assert.assertNotNull(route);
+        Assert.assertTrue(route.getRoutePoints().get(0).getGeoCoordinate().getLatitude().equals(12.3212));
     }
 }

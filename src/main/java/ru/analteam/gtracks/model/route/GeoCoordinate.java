@@ -1,9 +1,6 @@
 package ru.analteam.gtracks.model.route;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by dima-pc on 04.06.2016.
@@ -34,6 +31,7 @@ public class GeoCoordinate {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
