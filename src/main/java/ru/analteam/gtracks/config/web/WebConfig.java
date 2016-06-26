@@ -104,6 +104,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("xml_escape", new XmlEscape());
         configurer.setFreemarkerVariables(map);
+        configurer.setDefaultEncoding("UTF-8");
         return configurer;
     }
 

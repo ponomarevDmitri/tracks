@@ -52,7 +52,7 @@ public class RouteDto2RouteConverter implements Converter<RouteDto, Route> {
         RoutePoint result = new RoutePoint();
 
         //todo: add double truncation
-        result.setGeoCoordinate(new GeoCoordinate(routePointDto.getLatitude(), routePointDto.getLongitude()));
+        result.setGeoCoordinate(new GeoCoordinate(routePointDto.getLat(), routePointDto.getLng()));
         result.setDescription(routePointDto.getDescription());
         result.setShortDescription(routePointDto.getShortDescription());
 

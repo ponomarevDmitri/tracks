@@ -7,8 +7,8 @@ public class RoutePointDto {
     private String shortDescription;
     private String description;
 
-    private Double latitude;
-    private Double longitude;
+    private Double lat;
+    private Double lng;
 
     public String getShortDescription() {
         return shortDescription;
@@ -26,19 +26,19 @@ public class RoutePointDto {
         this.description = description;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Double getLat() {
+        return lat;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public Double getLng() {
+        return lng;
     }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setLng(Double lng) {
+        this.lng = lng;
     }
 }

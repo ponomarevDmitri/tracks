@@ -31,15 +31,15 @@ public class RouteDto2RouteConverterTest {
         RoutePointDto routePointDto = new RoutePointDto();
         routePointDto.setShortDescription("first point");
         routePointDto.setDescription("first point description");
-        routePointDto.setLatitude(11.111111d);
-        routePointDto.setLongitude(111.222222d);
+        routePointDto.setLat(11.111111d);
+        routePointDto.setLng(111.222222d);
         routePointDtos.add(routePointDto);
 
         routePointDto = new RoutePointDto();
         routePointDto.setShortDescription("second point");
         routePointDto.setDescription("second point description");
-        routePointDto.setLatitude(22.333333d);
-        routePointDto.setLongitude(122.333333d);
+        routePointDto.setLat(22.333333d);
+        routePointDto.setLng(122.333333d);
         routePointDtos.add(routePointDto);
 
         source.setRoute(routePointDtos);

@@ -3,44 +3,134 @@
  */
 
 var routePoint = {
-    coordinate : {
-        lat: "12",
-        lng: "asd"
-    },
+    lat: "12",
+    lng: "asd",
 
     extra : {
         shortDescription: "",
         description: ""
     }
-}
+};
 
 var route = {
     name: "routeName",
-    points: [],
+    points: [], //insances of routePoints (see above)
     shortDescription: "",
     description: ""
+};
+
+
+
+
+var mapInfo = {
+    map: undefined,
+    polylines: []
+};
+
+/**
+ * Отрисовывает мапу в DOM-элементе c id=mapElenentId
+ * @param mapElementId
+ */
+function initUserMapByElemId(mapElementId){
+    initUserMap(document.getElementById(mapElementId));
 }
 
+function initMap() {
+    initUserMapByElemId("map");
+}
 
-function initUserMap(mapElementId){
-    var currentGCoords = browser2GoogleCoords(getLocation());
-    map = new google.maps.Map(document.getElementById(mapElementId), {
-        center: {lat: -34.397, lng: 150.644},
+function initUserMap(domElement){
+    var googleMapConfig = {
         zoom: 8
+    };
+
+    var currentGCoords = browser2GoogleCoords(getLocation());
+    if (currentGCoords) {
+        googleMapConfig.center = currentGCoords;
+    } else {
+        googleMapConfig.center = {lat: -34.397, lng: 150.644};
+    }
+
+    map = new google.maps.Map(domElement, googleMapConfig);
+    mapInfo.map = map;
+}
+
+function enableAddPointMode(){
+    // Add a listener for the click event
+    map.addListener('click', addLatLng);
+}
+
+// Handles click events on a map, and adds a new point to the Polyline.
+function addLatLng(event) {
+    var path = poly.getPath();
+
+    // Because path is an MVCArray, we can simply append a new coordinate
+    // and it will automatically appear.
+    path.push(event.latLng);
+
+    // Add a new marker at the new plotted point on the polyline.
+    var marker = new google.maps.Marker({
+        position: event.latLng,
+        title: '#' + path.getLength(),
+        map: map
     });
 }
 
 function drawRoute(route) {
-    if(route.points) {
+    if (route.points) {
+        //todo make map style
+        var poly = new google.maps.Polyline({
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+        });
 
+
+        poly.setMap(mapInfo.map);
+
+        for(var index = 0; index < route.points.length; index++) {
+            var routePoint = route.points[i];
+
+            var path = poly.getPath();
+
+            // Because path is an MVCArray, we can simply append a new coordinate
+            // and it will automatically appear.
+            //path.push(event.latLng);
+            path.push(event.latLng);
+
+            // Add a new marker at the new plotted point on the polyline.
+            var markerConfig = {
+                position: event.latLng,
+                title: '#' + path.getLength(),
+                map: map
+            };
+
+            if (routePoint.extra) {
+                markerConfig.title = routePoint.extra.shortDescription;
+            }
+
+            var marker = new google.maps.Marker(markerConfig);
+        }
+
+
+    } else {
+        showError()
     }
 }
 
-function showError(errorElement){
+/**
+ * Отображает ошибку c текстом errText внутри элемента errorElement (планируется, что это будет некий div)
+ * @param errorElement
+ * @param errText
+ */
+function showError(errorElement, errText){
     //todo
 }
 
-
+/**
+ * Получает текущее положение пользователя из информации браузера
+ * @returns {*}
+ */
 function getLocation() {
     var result = null;
     if (navigator.geolocation) {
@@ -55,11 +145,20 @@ function getLocation() {
     return result;
 }
 
+/**
+ *
+ * @param browserCoords
+ * @returns google coords object or undefined
+ */
 function browser2GoogleCoords(browserCoords){
-    var result = {};
+    if (browserCoords) {
+        var result = {};
 
-    result.lng = browserCoords.longitude;
-    result.lat = browserCoords.latitude;
+        result.lng = browserCoords.longitude;
+        result.lat = browserCoords.latitude;
 
-    return result;
+        return result;
+    } else {
+        return undefined;
+    }
 }
