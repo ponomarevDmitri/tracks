@@ -41,12 +41,20 @@
         </div>
     </div>
 
-    <div>
+    <div class="row">
         <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-default" onclick="enableAddPointMode();">Добавить точку</button>
             <button type="button" class="btn btn-default">Удалить точку</button>
-            <button type="button" class="btn btn-default">Right</button>
+            <button type="button" class="btn btn-default" onclick="saveCurrentRoute();">Сохранить маршрут</button>
         </div>
+    </div>
+    <div class="row">
+        <label for="shortPointDescription"></label>
+        <input id="shortPointDescription" type="text" />
+    </div>
+    <div class="row">
+        <label for="pointDescription"></label>
+        <input id="pointDescription" type="text" />
     </div>
 
 </div>

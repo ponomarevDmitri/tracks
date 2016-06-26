@@ -2,6 +2,10 @@
  * Created by dima-pc on 17.05.2016.
  */
 
+/**
+ * routePoint and route comes from server
+ * @type {{lat: string, lng: string, extra: {shortDescription: string, description: string}}}
+ */
 var routePoint = {
     lat: "12",
     lng: "asd",
@@ -24,7 +28,8 @@ var route = {
 
 var mapInfo = {
     map: undefined,
-    polylines: []
+    polylines: [], // резерв
+    polyline: undefined
 };
 
 /**
@@ -52,17 +57,28 @@ function initUserMap(domElement){
     }
 
     map = new google.maps.Map(domElement, googleMapConfig);
+
+
     mapInfo.map = map;
 }
 
 function enableAddPointMode(){
+    if (!mapInfo.polyline) {
+        var poly = new google.maps.Polyline({
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+        });
+        poly.setMap(map);
+        mapInfo.polyline = poly;
+    }
     // Add a listener for the click event
     map.addListener('click', addLatLng);
 }
 
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
-    var path = poly.getPath();
+    var path = mapInfo.polyline.getPath();
 
     // Because path is an MVCArray, we can simply append a new coordinate
     // and it will automatically appear.
@@ -74,6 +90,14 @@ function addLatLng(event) {
         title: '#' + path.getLength(),
         map: map
     });
+}
+
+function saveCurrentRoute() {
+    saveRoute(mapInfo.polyline);
+}
+
+function saveRoute(route) {
+
 }
 
 function drawRoute(route) {
