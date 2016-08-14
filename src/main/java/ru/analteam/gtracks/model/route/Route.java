@@ -29,7 +29,7 @@ public class Route {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<RoutePoint> getRoutePoints() {
         return routePoints;
     }

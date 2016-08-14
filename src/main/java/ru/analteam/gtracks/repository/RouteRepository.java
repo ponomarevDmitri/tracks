@@ -31,6 +31,12 @@ public class RouteRepository implements IRouteRepository {
         }
     }
 
+    public List<Route> getRouteListByIds(List<Long> routeIdList) {
+        TypedQuery<Route> routeQuery = em.createQuery("select route from Route route where route.id in :idList", Route.class);
+        routeQuery.setParameter("idList", routeIdList);
+        return routeQuery.getResultList();
+    }
+
     public Route create(Route route){
         em.persist(route);
         em.flush();

@@ -10,7 +10,6 @@
     <link href="/static/assets/bootstrap-3.3.6/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 
 
-
     <script>
         function initMap() {
             initUserMapByElemId("map");
@@ -24,7 +23,7 @@
     <style>
 
         .app_map {
-            width: 500px ;
+            width: 500px;
             height: 500px;
         }
 
@@ -36,25 +35,27 @@
 
 <div class="container">
     <div class="row">
+    <#--<iframe>-->
         <div id="map" class="app_map">
 
         </div>
+    <#--</iframe>-->
     </div>
 
     <div class="row">
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" onclick="enableAddPointMode();">Добавить точку</button>
+            <button type="button" class="btn btn-default" onclick="enableAddPointMode();">Создать маршрут</button>
             <button type="button" class="btn btn-default">Удалить точку</button>
             <button type="button" class="btn btn-default" onclick="saveCurrentRoute();">Сохранить маршрут</button>
         </div>
     </div>
     <div class="row">
         <label for="shortPointDescription"></label>
-        <input id="shortPointDescription" type="text" />
+        <input id="shortPointDescription" type="text"/>
     </div>
     <div class="row">
         <label for="pointDescription"></label>
-        <input id="pointDescription" type="text" />
+        <input id="pointDescription" type="text"/>
     </div>
 
 </div>
