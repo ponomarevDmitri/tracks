@@ -14,6 +14,10 @@
         function initMap() {
             initUserMapByElemId("map");
         }
+
+        function loadRoutes() {
+
+        }
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
@@ -23,7 +27,7 @@
     <style>
 
         .app_map {
-            width: 500px;
+            width: 100%;
             height: 500px;
         }
 
@@ -36,13 +40,32 @@
 <div class="container">
     <div class="row">
     <#--<iframe>-->
-        <div id="map" class="app_map">
+        <div>
+            <div style="width:80%; display: inline-block">
+                <div id="map" class="app_map">
 
+                </div>
+            </div>
+            <div style="width:19%; display: inline-block; position: fixed">
+                <ul id="routeList" class="list-group">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+                <button type="button" class="btn btn-default" >загрузить маршруты</button>
+            </div>
         </div>
+    <#--<div style="width:20% display: block">-->
+    <#--<button type="button" class="btn btn-default" >list</button>-->
+    <#--</div>-->
     <#--</iframe>-->
     </div>
 
     <div class="row">
+    <#--<iframe height="400px" width="100%" frameborder="0" scrolling="no" src="/map/simpleMap">-->
+    <#--</iframe>-->
         <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-default" onclick="enableAddPointMode();">Создать маршрут</button>
             <button type="button" class="btn btn-default">Удалить точку</button>

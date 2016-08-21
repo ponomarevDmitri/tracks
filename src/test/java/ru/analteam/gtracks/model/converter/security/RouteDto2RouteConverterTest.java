@@ -42,7 +42,7 @@ public class RouteDto2RouteConverterTest {
         routePointDto.setLng(122.333333d);
         routePointDtos.add(routePointDto);
 
-        source.setRoute(routePointDtos);
+        source.setPoints(routePointDtos);
 
 
         Route converted = converter.convert(source);

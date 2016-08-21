@@ -1,5 +1,7 @@
 package ru.analteam.gtracks.model.route;
 
+import ru.analteam.gtracks.model.security.SecUser;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,7 +19,8 @@ public class Route {
     private String name;
     private String shortDescription;
     private String description;
-
+    
+    private SecUser user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,5 +66,18 @@ public class Route {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @ManyToOne
+    @JoinTable(name="user_routes",
+            joinColumns = @JoinColumn(name="route_id"),
+            inverseJoinColumns = @JoinColumn(name="user_id")
+    )
+    public SecUser getUser() {
+        return user;
+    }
+
+    public void setUser(SecUser user) {
+        this.user = user;
     }
 }

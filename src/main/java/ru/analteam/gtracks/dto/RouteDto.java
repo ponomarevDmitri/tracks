@@ -13,7 +13,7 @@ public class RouteDto {
     private String description;
     private UserDto user;
 
-    private List<RoutePointDto> route;
+    private List<RoutePointDto> points;
 
 
     public Long getId() {
@@ -28,12 +28,12 @@ public class RouteDto {
         this.user = user;
     }
 
-    public List<RoutePointDto> getRoute() {
-        return route;
+    public List<RoutePointDto> getPoints() {
+        return points;
     }
 
-    public void setRoute(List<RoutePointDto> route) {
-        this.route = route;
+    public void setPoints(List<RoutePointDto> points) {
+        this.points = points;
     }
 
     public void setId(Long id) {
