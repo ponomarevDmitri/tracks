@@ -7,7 +7,7 @@
  * @type {{lat: string, lng: string, extra: {shortDescription: string, description: string}}}
  */
 var routePoint = {
-    lat:  121212.32121,
+    lat: 121212.32121,
     lng: 2311321.21312321,
 
     extra: {
@@ -32,6 +32,14 @@ var mapRoute = {
     description: ""
 };
 
+
+/**
+ * Клиентская модель маршрута
+ * @param name имя
+ * @param description описание
+ * @param shortDescription краткое описание
+ * @constructor
+ */
 function RouteModel(name, description, shortDescription) {
     this.name = name;
     this.description = description;
@@ -39,6 +47,14 @@ function RouteModel(name, description, shortDescription) {
     this.points = []
 }
 
+/**
+ *
+ * @param latlng обхект в формате  {lat: 11, lng: 12}
+ * @param name
+ * @param description
+ * @param shortDescription
+ * @constructor
+ */
 function RoutePointModel(latlng, name, description, shortDescription) {
     this.latlng = latlng;
     this.name = name;
@@ -47,15 +63,141 @@ function RoutePointModel(latlng, name, description, shortDescription) {
 
 }
 
+/**
+ *
+ * @param mapInfoParameters for future use
+ * @constructor
+ */
+function MapInfo(mapInfoParameters) {
+    this.map = undefined; // instanceof new google.maps.Map(domElement, googleMapConfig);
+    this.polylines = []; // резерв
+    this.polyline = undefined; //instanceof  new google.maps.Polyline
+    this.routeModel = new RouteModel("Some route name", "descr", "shortDescr");
+
+    // region PRIVATE MapInfo members
+
+    // endregion
 
 
+    // region PUBLIC MapInfo members
+    /**
+     * Удаляет линию на карте.
+     */
+    this.deleteAllPolilines = function () {
+        this.routeModel = null;
+        if (this.polyline) {
+            this.polyline.setMap(null);
+            this.polyline = null;
+        }
+    };
 
-var mapInfo = {
-    map: undefined,
+    /**
+     * Очищает карту. Отрисовывает на карте this.map клиентскую модель маршрута routeModel.
+     * @param routeModel модель маршрута в формате RouteModel
+     */
+    this.drawRoute = function (routeModel) {
+        this.deleteAllPolilines();
+        createAndAddRoutePolilyne(this);
+
+        this.routeModel = routeModel;
+
+        var points = routeModel.points;
+
+        for (var pointIndex = 0; pointIndex < points.length; pointIndex++) {
+            createMarkerAndAddToPath(points[pointIndex], this);
+        }
+    };
+
+    /**
+     * Добавляет точку на карту
+     * @param routePointModel описание точки в формате RoutePointModel
+     */
+    this.addPoint = function (routePointModel) {
+        if (routePointModel) {
+            mapInfo.routeModel.points.push(routePointModel)
+
+        }
+    };
+    // endregion
+}
+
+
+var mapInfo = new MapInfo();
+
+
+/*{
+    map: undefined, // instanceof new google.maps.Map(domElement, googleMapConfig);
     polylines: [], // резерв
-    polyline: undefined,
-    routeModel: new RouteModel("Some route name", "descr", "shortDescr")
-};
+    polyline: undefined, //instanceof  new google.maps.Polyline
+    routeModel: new RouteModel("Some route name", "descr", "shortDescr"),
+
+    /!**
+     * Удаляет маршрут, описанный на карте this.map и содержащийся в точках this.polyline
+     *!/
+    deleteAllPolilines: function () {
+        this.routeModel = null;
+        if (this.polyline) {
+            this.polyline.setMap(null);
+            this.polyline = null;
+        }
+    },
+
+    /!**
+     * Очищает карту. Отрисовывает на карте this.map клиентскую модель маршрута routeModel.
+     * @param routeModel модель маршрута в формате RouteModel
+     *!/
+    drawRoute: function (routeModel) {
+        this.deleteAllPolilines();
+        createAndAddRoutePolilyne(this);
+
+        this.routeModel = routeModel;
+
+        var points = routeModel.points;
+
+        for (var pointIndex = 0; pointIndex < points.length; pointIndex++) {
+            createMarkerAndAddToPath(points[pointIndex], this);
+        }
+    },
+
+    addPoint: function (routePointModel) {
+        if (routePointModel) {
+            mapInfo.routeModel.points.push(routePointModel)
+
+        }
+    }
+};*/
+
+/**
+ * Создает маркер google-карт из объекта point
+ * @param point объект в формате RoutePointModel
+ * @param mapInfo объект mapInfo
+ */
+function createMarkerAndAddToPath(point, mapInfo) {
+    var path = mapInfo.polyline.getPath();
+    var coordinates = {
+        lat: point.latlng.lat,
+        lng: point.latlng.lng
+    };
+    // Because path is an MVCArray, we can simply append a new coordinate
+    // and it will automatically appear.
+    path.push({
+        lat: function () {
+            return coordinates.lat;
+        },
+        lng: function () {
+            return coordinates.lng;
+        }
+
+    });
+
+    // Add a new marker at the new plotted point on the polyline.
+    var marker = new google.maps.Marker({
+        position: coordinates,
+        title: '#' + path.getLength(),
+        map: mapInfo.map
+    });
+}
+
 
 //region
 //======================================================================
@@ -63,13 +205,13 @@ var mapInfo = {
 //@param routeModel - instance of RouteModel
 
 /**
- * Конвертирование локальной модели маршрута в серверную модель
+ * Конвертирование клиентской модели маршрута в серверную модель
  */
 function convert2ServerRouteModel(routeModel) {
     var routePoints = routeModel.points;
 
     var resultRoute = {
-        points : []
+        points: []
     };
 
     for (var i = 0; i < routePoints.length; i++) {
@@ -83,30 +225,9 @@ function convert2ServerRouteModel(routeModel) {
 
     return resultRoute;
 }
-/**
- * Конвертирование серверную модели в локальную модель маршрута
- */
-function convertFromServerRouteModel(serverRouteModel) {
-    var serverRoutePoints = serverRouteModel.points;
-
-    var localModelRoute = {
-        points : []
-    };
-
-    for (var i = 0; i < serverRoutePoints.length; i++) {
-        var convertedPointModel = convertFromServerPointModel(serverRoutePoints[i]);
-        localModelRoute.points.push(convertedPointModel);
-    }
-
-    localModelRoute.name = serverRouteModel.name;
-    localModelRoute.description = serverRouteModel.description;
-    localModelRoute.shortDescription = serverRouteModel.shortDescription;
-
-    return localModelRoute;
-}
 
 /**
- * Конвертирование локальной модели точки в модель серверную
+ * Конвертирование клиентской модели точки в модель серверную
  */
 function convert2ServerPointModel(routePointModel) {
     var resultModel = {};
@@ -120,8 +241,47 @@ function convert2ServerPointModel(routePointModel) {
     return resultModel;
 }
 
+
 /**
- * Конвертирование серверной модели точки в модель локальную
+ * Конвертирование списка серверных моделей маршрута (приходящих из RestRouteController#getUserRoutes())
+ */
+function convertFromServerRouteModelList(serverRouteModelList) {
+    var result = [];
+
+    if (serverRouteModelList) {
+        for (var i = 0; i < serverRouteModelList.length; i++) {
+            result.push(convertFromServerRouteModel(serverRouteModelList[i]));
+        }
+    }
+
+    return result;
+}
+
+/**
+ * Конвертирование серверную модели в клиентскую модель маршрута
+ */
+function convertFromServerRouteModel(serverRouteModel) {
+    var serverRoutePoints = serverRouteModel.points;
+
+    var localModelRoute = {
+        points: []
+    };
+
+    for (var i = 0; i < serverRoutePoints.length; i++) {
+        var convertedPointModel = convertFromServerPointModel(serverRoutePoints[i]);
+        localModelRoute.points.push(convertedPointModel);
+    }
+
+    localModelRoute.id = serverRouteModel.id;
+    localModelRoute.name = serverRouteModel.name;
+    localModelRoute.description = serverRouteModel.description;
+    localModelRoute.shortDescription = serverRouteModel.shortDescription;
+
+    return localModelRoute;
+}
+
+/**
+ * Конвертирование серверной модели точки в модель клиентскую
  */
 function convertFromServerPointModel(serverPointModel) {
     var resultModel = {};
@@ -139,47 +299,55 @@ function convertFromServerPointModel(serverPointModel) {
 //==========================================================
 //endregion
 
-//region работа по отрисовке карты
+//region работа по отрисовке маршрута, содержащегося в routeModel на карте, описанной в mapInfo
 //=========================================================
-function drawRouteFromClientModel(routeModel, mapInfo){
-    if (routeModel.points) {
-        createAndAddRoutePolilyne(mapInfo);
 
-        var points = routeModel.points;
-
-        for (var pointIndex = 0; pointIndex < points.length; pointIndex++) {
-            var coordinates = {
-                lat: points[pointIndex].latlng.lat,
-                lng: points[pointIndex].latlng.lng
-            };
-            addLatLngFromCoordinates(coordinates, mapInfo);
-        }
-    } else {
-        showError();// не пришли элементы (хотя это маловероятно)
-    }
-}
-
-/**
- * Делает запрос данных маршрута routeId и отрисовывает соответсвующий маршрут.
- * @param routeId идентификатор маршрута.
- */
-function drawRouteWithId(routeId) {//????
-    jQuery.ajax({
-        type: "GET",
-        url: "/routes/create",
-        success : function (data) {
-            drawRouteFromClientModel(convertFromServerRouteModel(data), mapInfo);
-        }
-    })
-}
 //=========================================================
 //endregion
 
 
+//region работа с картой на конкретной странице (тестовой)
 
 
+function UserRoutes(routeClientList) {
+    this.routes = routeClientList;
+}
 
-//region
+var userRoutes;
+
+function loadAllRoutesForCurrentUser() {
+    jQuery.ajax({
+        type: "GET",
+        url: "/routes/user",
+        success: function (data) {
+            var clientModelRoutes = convertFromServerRouteModelList(data);
+            userRoutes = new UserRoutes(clientModelRoutes);
+            for (var i = 0; i < clientModelRoutes.length; i++) {
+                var clientModelRouteObject = clientModelRoutes[i];
+                $("#routeList").append(
+                    '<li class="list-group-item" onclick="clearMapAndDrawRouteWithId(' + clientModelRouteObject.id + ')"></li>');
+            }
+        }
+    })
+}
+
+
+/**
+ * Отрисовывает соответсвующий маршрут по его id.
+ * @param routeId идентификатор маршрута.
+ */
+function clearMapAndDrawRoute() { //????
+    var routeId = $("#routeNumberInput").val();
+
+    jQuery.ajax({
+        type: "GET",
+        url: "/routes/" + routeId,
+        success: function (data) {
+            mapInfo.drawRoute(convertFromServerRouteModel(data));
+            //cleanAndDrawRouteFromClientModel(convertFromServerRouteModel(data), mapInfo);
+        }
+    })
+}
 
 //endregion
 
@@ -189,10 +357,6 @@ function drawRouteWithId(routeId) {//????
  */
 function initUserMapByElemId(mapElementId) {
     initUserMap(document.getElementById(mapElementId));
-}
-
-function initMap() {
-    initUserMapByElemId("map");
 }
 
 function initUserMap(domElement) {
@@ -213,21 +377,25 @@ function initUserMap(domElement) {
 }
 
 function enableAddPointMode() {
+    enableAddPointModeToMapInfo(mapInfo);
+}
+
+function enableAddPointModeToMapInfo(mapInfo) {
     if (!mapInfo.polyline) {
         createAndAddRoutePolilyne(mapInfo);
     }
     // Add a listener for the click event
-    map.addListener('click', addLatLngFromEvent);
+    mapInfo.map.addListener('click', addLatLngFromEvent);
 }
 
 function createAndAddRoutePolilyne(mapInfo) {
-        var poly = new google.maps.Polyline({
-            strokeColor: '#000000',
-            strokeOpacity: 1.0,
-            strokeWeight: 3
-        });
-        poly.setMap(mapInfo.map);
-        mapInfo.polyline = poly;
+    var poly = new google.maps.Polyline({
+        strokeColor: '#000000',
+        strokeOpacity: 1.0,
+        strokeWeight: 3
+    });
+    poly.setMap(mapInfo.map);
+    mapInfo.polyline = poly;
 }
 
 // Handles click events on a map, and adds a new point to the Polyline.
@@ -242,7 +410,7 @@ function addLatLngFromEvent(event) {
 }
 
 /**
- * Отрисовывает точку на карте
+ * Отрисовывает точку на карте, добавляет клиентскую модель точки в mapInfo
  * @param coordinates объект координат в формате {lat: 11, lng: 12}
  * @param mapInfo объект-данные о карте
  */
@@ -251,10 +419,10 @@ function addLatLngFromCoordinates(coordinates, mapInfo) {
     // Because path is an MVCArray, we can simply append a new coordinate
     // and it will automatically appear.
     path.push({
-        lat: function(){
-          return  coordinates.lat;
+        lat: function () {
+            return coordinates.lat;
         },
-        lng: function() {
+        lng: function () {
             return coordinates.lng;
         }
 
@@ -269,14 +437,23 @@ function addLatLngFromCoordinates(coordinates, mapInfo) {
     mapInfo.routeModel.points.push(new RoutePointModel(coordinates, "", "", ""))
 }
 
+/**
+ * Итерирутеся через массив mapInfo.routeModel.points: для каждой точки отрисовывает её на карте,
+ * хранящейся в mapInfo.map
+ * @param mapInfo
+ */
+function iterateOverRouteModelPointsAndAddMapMarkers(mapInfo) {
+}
+
+
 function saveCurrentRoute() {
     saveRoute(mapInfo);
 }
 
 function saveRoute(mapInfo) {
     $.ajax({
-        type: "POST",
-        url: "/routes/create",
+        type: "PUT",
+        url: "/routes",
         data: JSON.stringify(convert2ServerRouteModel(mapInfo.routeModel)),
         dataType: "json",
         contentType: "application/json"

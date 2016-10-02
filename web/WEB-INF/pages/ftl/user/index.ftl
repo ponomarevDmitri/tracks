@@ -14,10 +14,6 @@
         function initMap() {
             initUserMapByElemId("map");
         }
-
-        function loadRoutes() {
-
-        }
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
@@ -55,6 +51,9 @@
                     <li class="list-group-item">Vestibulum at eros</li>
                 </ul>
                 <button type="button" class="btn btn-default" >загрузить маршруты</button>
+
+                <input id="routeNumberInput" type="number">
+                <button type="button" class="btn btn-default" onclick="clearMapAndDrawRoute();">Отрисовать маршрут</button>
             </div>
         </div>
     <#--<div style="width:20% display: block">-->

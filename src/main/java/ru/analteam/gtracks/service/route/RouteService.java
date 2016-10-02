@@ -3,12 +3,14 @@ package ru.analteam.gtracks.service.route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.analteam.gtracks.exception.AccessToRouteDenied;
 import ru.analteam.gtracks.model.route.Route;
 import ru.analteam.gtracks.model.route.UserRoutes;
 import ru.analteam.gtracks.model.security.SecUser;
 import ru.analteam.gtracks.repository.IRouteRepository;
 import ru.analteam.gtracks.repository.IUserRoutesRepository;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,17 @@ public class RouteService {
 
     @Autowired
     private IUserRoutesRepository userRoutesRepository;
+
+    @Nullable
+    public Route getRouteByIdWithPermissionCheck(Long id, SecUser user) throws AccessToRouteDenied {
+        Route routeById = getRouteById(id);
+
+        if (!routeById.getUser().getId().equals(user.getId())) {
+            throw new AccessToRouteDenied();
+        }
+
+        return routeById;
+    }
 
     public Route getRouteById(Long id) {
         return routeRepository.getRouteById(id);
