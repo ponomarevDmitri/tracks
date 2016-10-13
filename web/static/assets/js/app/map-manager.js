@@ -50,9 +50,9 @@ function RouteModel(name, description, shortDescription) {
 /**
  *
  * @param latlng обхект в формате  {lat: 11, lng: 12}
- * @param name
- * @param description
- * @param shortDescription
+ * @param name строка названия точки маршрута
+ * @param description описания точки маршрута
+ * @param shortDescription краткого описания точки маршрута
  * @constructor
  */
 function RoutePointModel(latlng, name, description, shortDescription) {
@@ -193,6 +193,7 @@ function createMarkerAndAddToPath(point, mapInfo) {
     // Add a new marker at the new plotted point on the polyline.
     var marker = new google.maps.Marker({
         position: coordinates,
+        //draggable: true,
         title: '#' + path.getLength(),
         map: mapInfo.map
     });

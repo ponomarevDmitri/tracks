@@ -100,7 +100,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean(name ="freemarkerConfig")
     public FreeMarkerConfigurer freemarkerConfig() {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-        configurer.setTemplateLoaderPath("/WEB-INF/pages/ftl/");
+        configurer.setTemplateLoaderPath("/");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("xml_escape", new XmlEscape());
         configurer.setFreemarkerVariables(map);
@@ -116,6 +116,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         viewResolver.setContentType("text/html;charset=UTF-8");
 
 //        viewResolver.setPrefix("/WEB-INF/pages/ftl/");
+        viewResolver.setPrefix("/pages/ftl/");
         viewResolver.setSuffix(".ftl");
         return viewResolver;
     }
