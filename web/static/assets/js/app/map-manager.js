@@ -257,6 +257,14 @@ function convertFromServerRouteModelList(serverRouteModelList) {
 
     return result;
 }
+/**
+ * Конвертирование списка серверных моделей маршрута (приходящих из RestRouteController#getUserRoutes())
+ * в объект типа {UserRoutes}
+ */
+function convertServerRouteModelList2UserRoutes(serverRouteModelList) {
+    var clientModelRoutes = convertFromServerRouteModelList(serverRouteModelList);
+    return new UserRoutes(clientModelRoutes);
+}
 
 /**
  * Конвертирование серверную модели в клиентскую модель маршрута
@@ -321,8 +329,7 @@ function loadAllRoutesForCurrentUser() {
         type: "GET",
         url: "/routes/user",
         success: function (data) {
-            var clientModelRoutes = convertFromServerRouteModelList(data);
-            userRoutes = new UserRoutes(clientModelRoutes);
+            userRoutes = convertServerRouteModelList2UserRoutes(data);
             for (var i = 0; i < clientModelRoutes.length; i++) {
                 var clientModelRouteObject = clientModelRoutes[i];
                 $("#routeList").append(
