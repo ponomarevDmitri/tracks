@@ -93,24 +93,41 @@ function UserRouteList(containerElem) {
 
 //region definitions for user_route_list page
 
-function drawUsersRoutes(containerElement) {
-    var userRouteList = new UserRouteList(containerElement);
+var page_data = {
+    userRoutes: null,
+    mapInfo: null
+};
+
+function drawUsersRouteList(routeListContainerElement) {
+    var userRouteList = new UserRouteList(routeListContainerElement);
     userRouteList.onDrawRouteClickEvent = drawRouteOnPage;
     $.ajax({
         url: "/routes/user",
         success: function (data) {
             var clientModelRoutes = convertServerRouteModelList2UserRoutes(data);
             userRouteList.drawRouteList(clientModelRoutes);
+            page_data.userRoutes = clientModelRoutes;
         }
     });
+}
+
+function initUserMapOnUserListPage() {
+    page_data.mapInfo = new MapInfo({mapDomElement: getMapDomElement()})
 }
 
 /**
  * @param routeModel {RouteModel}
  */
-function drawRouteOnPage(routeModel){
-    //todo
+function drawRouteOnPage(routeModel) {
+    //var mapJDom = getMapDomElement();
+    //if (!mapJDom.getAttribute("hidden")) {
+    //    mapJDom.setAttribute("hidden", "false");
+    //}
+    page_data.mapInfo.drawRoute(routeModel);
+}
 
+function getMapDomElement() {
+    return document.getElementById("mapForRoute");
 }
 //endregion
 

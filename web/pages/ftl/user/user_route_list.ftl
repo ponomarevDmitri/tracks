@@ -9,11 +9,30 @@
     <link href="/static/assets/css/user_route_list.css" type="text/css">
     <script src="/static/assets/js/pages/user_route_list.js"></script>
     <title></title>
+    <style>
+        .user_route_map {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+            width: 500px;
+            /*display: inline-block;*/
+        }
 
-    <script >
-        $( document ).ready(function() {
-            drawUsersRoutes($("#userRouteContainer"));
-        })
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
+            async defer></script>
+
+    <script>
+        $(document).ready(function () {
+            drawUsersRouteList($("#userRouteContainer"));
+
+        });
+        function initMap() {
+//            initUserMapByElemId("mapForRoute");
+            initUserMapOnUserListPage();
+//            drawUsersRoutes($("#userRouteContainer"));
+        }
     </script>
 </head>
 <body>
@@ -25,11 +44,14 @@ HELLO! THIS IS USER ROUTE LIST!
 
 <div class="container">
     <div id="userRouteContainer" class="row">
-        <#--<ul class="user_route_list_ul">
+    <#--<ul class="user_route_list_ul">
             <li>
 
             </li>
         </ul>-->
+    </div>
+    <div id="userMapId" class="user_route_view_container">
+        <div id="mapForRoute" class="user_route_map" <#--hidden="true"-->></div>
     </div>
 </div>
 
