@@ -24,6 +24,12 @@ public class IndexPageController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/wellcome")
+    public String wellcome(@AuthenticationPrincipal UserDetails userDetails){
+
+        return "wellcome_page";
+    }
+
     //may need to use ServletContext context
     @RequestMapping("/index")
     public ModelAndView index(@AuthenticationPrincipal UserDetails userDetails){
