@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+п»ї<!DOCTYPE html>
 <!-- saved from url=(0040)http://bootstrap-3.ru/examples/carousel/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -31,14 +31,14 @@
 <div class="modal" id="myModal">
     <div class="modal-header">
         <button class="close" data-dismiss="modal">?</button>
-        <h3>Заголовок</h3>
+        <h3>Р—Р°РіРѕР»РѕРІРѕРє</h3>
     </div>
     <div class="modal-body">
-        <p>Текст…</p>
+        <p>РўРµРєСЃС‚вЂ¦</p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn">Закрыть</a>
-        <a href="#" class="btn btn-primary">Сохранить</a>
+        <a href="#" class="btn">Р—Р°РєСЂС‹С‚СЊ</a>
+        <a href="#" class="btn btn-primary">РЎРѕС…СЂР°РЅРёС‚СЊ</a>
     </div>
 </div>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -54,14 +54,14 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="main_page">Маршруты</a></li>
-                <li ><a href="stat_table">Прочее</a></li>
-                <li><a href="http://bootstrap-3.ru/examples/starter-template/#about">О проекте</a></li>
+                <li class="active"><a href="main_page">РњР°СЂС€СЂСѓС‚С‹</a></li>
+                <li ><a href="stat_table">РџСЂРѕС‡РµРµ</a></li>
+                <li><a href="http://bootstrap-3.ru/examples/starter-template/#about">Рћ РїСЂРѕРµРєС‚Рµ</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <form class="navbar-form navbar-right" role="form">
-                        <button type="submit" class="btn btn-success">Войти</button>
+                        <button type="submit" class="btn btn-success">Р’РѕР№С‚Рё</button>
                     </form>
                 </li>
             </ul>
@@ -129,19 +129,19 @@
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+" style="width: 140px; height: 140px;">
             <h2>Heading</h2>
             <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-            <p><a class="btn btn-default" href="http://bootstrap-3.ru/examples/carousel/#" role="button">View details »</a></p>
+            <p><a class="btn btn-default" href="http://bootstrap-3.ru/examples/carousel/#" role="button">View details В»</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+" style="width: 140px; height: 140px;">
             <h2>Heading</h2>
             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-            <p><a class="btn btn-default" href="http://bootstrap-3.ru/examples/carousel/#" role="button">View details »</a></p>
+            <p><a class="btn btn-default" href="http://bootstrap-3.ru/examples/carousel/#" role="button">View details В»</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+" style="width: 140px; height: 140px;">
             <h2>Heading</h2>
             <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="http://bootstrap-3.ru/examples/carousel/#" role="button">View details »</a></p>
+            <p><a class="btn btn-default" href="http://bootstrap-3.ru/examples/carousel/#" role="button">View details В»</a></p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
@@ -192,7 +192,7 @@
     <!-- FOOTER -->
     <footer>
         <p class="pull-right"><a href="http://bootstrap-3.ru/examples/carousel/#">Back to top</a></p>
-        <p>© 2014 Company, Inc. · <a href="http://bootstrap-3.ru/examples/carousel/#">Privacy</a> · <a href="http://bootstrap-3.ru/examples/carousel/#">Terms</a></p>
+        <p>В© 2014 Company, Inc. В· <a href="http://bootstrap-3.ru/examples/carousel/#">Privacy</a> В· <a href="http://bootstrap-3.ru/examples/carousel/#">Terms</a></p>
     </footer>
 
 </div><!-- /.container -->
