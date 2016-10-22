@@ -17,6 +17,14 @@
             width: 500px;
             /*display: inline-block;*/
         }
+        .user_route_container {
+            display: inline-block;
+        }
+        .user_route_view_container {
+            height: 400px;
+            width: 600px;
+            display: inline-block;
+        }
 
     </style>
 
@@ -43,15 +51,18 @@
 HELLO! THIS IS USER ROUTE LIST!
 
 <div class="container">
-    <div id="userRouteContainer" class="row">
+    <div class="row ">
+        <div id="userRouteContainer" class="user_route_container">
+
+        </div>
     <#--<ul class="user_route_list_ul">
             <li>
 
             </li>
         </ul>-->
-    </div>
-    <div id="userMapId" class="user_route_view_container">
-        <div id="mapForRoute" class="user_route_map" <#--hidden="true"-->></div>
+        <div id="userMapId" class="user_route_view_container">
+            <div id="mapForRoute" class="user_route_map" <#--hidden="true"-->></div>
+        </div>
     </div>
 </div>
 
