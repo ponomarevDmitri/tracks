@@ -31,7 +31,7 @@
 ================================================== -->
 <body>
 <!-- login window -->
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="loginWindow">
     <div class="modal-header">
         <button class="close" data-dismiss="modal">×</button>
         <h3>Введите логин и пароль</h3>
@@ -66,6 +66,20 @@
     </div>
 </div>
 <!-- /.login window-->
+<!-- change lenguage window -->
+<div class="modal fade" id="languageChangeWindow">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Выберите ваш язык</h3>
+    </div>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</div>
+<!-- /.change lenguage window-->
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -86,13 +100,13 @@
 
             <ul  class="nav navbar-nav navbar-right"  >
 
-                <li ><a style = "height:40px; margin:5px;line-height:8px;color:white" id="signup-header-btn" class="btn btn-success signupbtn" href="https://snappa.io/#" data-toggle="modal" data-target="#loginModal" data-action="signup-form">Войти</a></li>
+                <li ><a style = "height:40px; margin:5px;line-height:8px;color:white" id="signup-header-btn" class="btn btn-success signupbtn" href="https://snappa.io/#" data-toggle="modal" data-target="#loginWindow" data-action="signup-form">Войти</a></li>
 
             </ul>
             <div class = "navbar-text navbar-right"></div>
             <div class = "navbar-text navbar-right"></div>
 
-            <div class = "navbar-text navbar-right" ><a href="#myModal"  data-toggle="modal">RU</a></div>
+            <div class = "navbar-text navbar-right" ><a href="#languageChangeWindow"  data-toggle="modal">RU</a></div>
 
 
         </div>
