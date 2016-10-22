@@ -47,8 +47,8 @@ public class AppConfig {
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(){
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
 
-        log.debug("Try to find specific app.properties file.");
-        Resource liq = new FileSystemResource("./app.properties");
+        log.debug("Try to find specific app.properties file in apache directory.");
+        Resource liq = new FileSystemResource("../conf/app.properties");
         if (liq.exists()) {
             configurer.setLocations(liq);
         } else {
