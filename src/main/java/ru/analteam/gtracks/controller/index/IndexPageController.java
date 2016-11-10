@@ -26,7 +26,6 @@ public class IndexPageController {
 
     @RequestMapping("/wellcome")
     public String wellcome(@AuthenticationPrincipal UserDetails userDetails){
-
         return "wellcome_page";
     }
 

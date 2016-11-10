@@ -6,14 +6,14 @@
 
     <style type="text/css"></style>
 
-    <#--region custom css files-->
+<#--region custom css files-->
     <link href="/static/assets/css/nav_style.css" rel="stylesheet" type="text/css">
-    <#--endregion-->
+<#--endregion-->
 
-    <#--region bootstrap css files-->
+<#--region bootstrap css files-->
     <link href="/static/assets/bootstrap-3.3.6/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/static/assets/bootstrap-3.3.6/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
-    <#--endregion-->
+<#--endregion-->
 
     <script>
         function initMap() {
@@ -21,7 +21,7 @@
         }
     </script>
 
-    <#--todo make getting google script from the server (for security reasons)-->
+<#--todo make getting google script from the server (for security reasons)-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
             async defer></script>
 <#--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo"-->
@@ -89,6 +89,10 @@
         <label for="pointDescription"></label>
         <input id="pointDescription" type="text"/>
     </div>
+<footer>
+<#include "/templates/ftl/UserFooter.ftl">
+</footer>
+
 
 </div>
 </body>

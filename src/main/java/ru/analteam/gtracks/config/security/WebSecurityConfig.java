@@ -84,8 +84,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
         http.authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/routes/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/index/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/index").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
