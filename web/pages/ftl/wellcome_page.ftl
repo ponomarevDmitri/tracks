@@ -93,7 +93,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="main_page">Маршруты</a></li>
+                <li class="active"><a href="routs_editor">Маршруты</a></li>
                 <li ><a href="stat_table">Прочее</a></li>
                 <li><a href="http://bootstrap-3.ru/examples/starter-template/#about">О проекте</a></li>
             </ul>
