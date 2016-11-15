@@ -28,6 +28,11 @@ public class IndexPageController {
         return "wellcome_page";
     }
 
+    @RequestMapping("/routs_editor")
+    public String routsEditor(@AuthenticationPrincipal UserDetails userDetails){
+        return "routs_editor";
+    }
+
     //may need to use ServletContext context
     @RequestMapping("/index")
     public ModelAndView index(@AuthenticationPrincipal UserDetails userDetails){
