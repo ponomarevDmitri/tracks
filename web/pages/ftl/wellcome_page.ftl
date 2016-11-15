@@ -65,6 +65,12 @@
         </div>
     </div>
 </div>
+
+<!-- change lang window -->
+<div id="chooseLangModal" class="modal fade">
+
+</div>
+
 <!-- /.login window-->
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -86,13 +92,19 @@
 
             <ul  class="nav navbar-nav navbar-right"  >
 
-                <li ><a style = "height:40px; margin:5px;line-height:8px;color:white" id="signup-header-btn" class="btn btn-success signupbtn" href="https://snappa.io/#" data-toggle="modal" data-target="#loginModal" data-action="signup-form">Войти</a></li>
+                <li >
+                    <#--<a style = "height:40px; margin:5px;line-height:8px;color:white" id="signup-header-btn"
+                        class="btn btn-success signupbtn" href="https://snappa.io/#" data-toggle="modal" data-target="#loginModal" data-action="signup-form">Войти</a>-->
+                    <input type="button" style = "height:40px; margin:5px;line-height:8px;color:white" id="signup-header-btn"
+                           class="btn btn-success signupbtn" data-toggle="modal" data-target="#loginModal" data-action="signup-form">
+
+                </li>
 
             </ul>
             <div class = "navbar-text navbar-right"></div>
             <div class = "navbar-text navbar-right"></div>
 
-            <div class = "navbar-text navbar-right" ><a href="#myModal"  data-toggle="modal">RU</a></div>
+            <div class = "navbar-text navbar-right" ><a href="#chooseLangModal"  data-toggle="modal">RU</a></div>
 
 
         </div>
@@ -234,5 +246,34 @@
 <script src="/static/assets/js/jquery/jquery-1.12.3.js"></script>
 <script src="/static/assets/bootstrap-3.3.6/js/bootstrap.min.js"></script>
 <script src="/static/assets/js/doc/docs.min.js"></script>
+
+
+<!-- Login modal
+================================================== -->
+<div id="loginModal" class="modal fade registration-panel">
+    <h1 class="clearfix">
+        Вход
+    </h1>
+    <div class="messages">
+    </div>
+
+    <form accept-charset="UTF-8" action="/j_spring_security_check" class="website" id="login_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="F4FeCHwhHEdbR0eZudJ004JydliP6pBFkOiPk/5yfyY="></div>
+        <h3>Вход через эл. почту или логин</h3>
+        <input id="plan" name="plan" type="hidden">
+        <fieldset>
+            <input autofocus="autofocus" id="login" name="login" placeholder="Ваш эл. адрес" type="email" value="">
+            <br>
+            <input id="password" name="password" placeholder="Пароль" type="password" value="">
+        </fieldset>
+        <label class="remember-me">
+            <input id="remember_me" name="remember_me" type="checkbox" value="on">
+            <span>Запомнить меня</span>
+        </label>
+        <br>
+        <button class="button btn-primary" id="login-button" type="submit">Вход</button>
+        <#--<div class="reset-password"><a href="/account/recover">Забыли пароль?</a></div>-->
+    </form>
+
+</div>
 
 </body></html>

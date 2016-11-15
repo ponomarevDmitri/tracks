@@ -16,7 +16,6 @@ import java.util.Collection;
  * Created by dima-pc on 12.02.2016.
  */
 @Controller
-@RequestMapping("/")
 public class IndexPageController {
      
     private static final String ADMIN_AUTHORITY_NAME = "ROLE_ADMIN";
@@ -56,5 +55,10 @@ public class IndexPageController {
             }
         }
         return false;
+    }
+
+    @RequestMapping("/")
+    private String wellcome(){
+        return "wellcome_page";
     }
 }
