@@ -1,5 +1,5 @@
 /**
- * Needs map manager script to be present.
+ * Needs map-manager js script to be present.
  */
 
 
@@ -60,7 +60,7 @@ function UserRouteList(containerElem) {
      * @param userRoutes {UserRoutes} type object
      */
     this.drawRouteList = function (userRoutes) {
-        this.routeListDomElemDrawer(userRoutes);
+        this.listDomElem = this.routeListDomElemDrawer(userRoutes);
 
         var userRouteList = userRoutes.routes;
         for (var i = 0; i < userRouteList.length; i++) {
@@ -98,6 +98,11 @@ var page_data = {
     mapInfo: null
 };
 
+/**
+ * Script for initiating on the old route list page
+ * @param routeListContainerElement
+ * @deprecated
+ */
 function drawUsersRouteList(routeListContainerElement) {
     var userRouteList = new UserRouteList(routeListContainerElement);
     userRouteList.onDrawRouteClickEvent = drawRouteOnPage;
@@ -111,8 +116,41 @@ function drawUsersRouteList(routeListContainerElement) {
     });
 }
 
-function initUserMapOnUserListPage() {
-    page_data.mapInfo = new MapInfo({mapDomElement: getMapDomElement()})
+
+
+function drawUsersRouteListNew(routeListContainerElement) {
+    var userRouteList = new UserRouteList(routeListContainerElement);
+    userRouteList.onDrawRouteClickEvent = drawRouteOnPage;
+    userRouteList.routeListDomElemDrawer = drawRouteListDomElem;
+    userRouteList.routeDomElemDrawer = drawRouteDomElem;
+    $.ajax({
+        url: "/routes/user",
+        success: function (data) {
+            var clientModelRoutes = convertServerRouteModelList2UserRoutes(data);
+            userRouteList.drawRouteList(clientModelRoutes);
+            page_data.userRoutes = clientModelRoutes;
+        }
+    });
+}
+/**
+ *
+ * @param routeModel {RouteModel}
+ * @return {*|jQuery|HTMLElement}
+ */
+function drawRouteDomElem(routeModel) {
+
+    var listItemElem = $("<div></div>");
+
+    listItemElem.addClass("routes_item");
+
+    listItemElem.text(routeModel.name);
+
+    this.listDomElem.append(listItemElem);
+    return listItemElem;
+}
+
+function drawRouteListDomElem(listOfRouteModel) {
+    return $("#userRouteListContainer");
 }
 
 /**
@@ -126,9 +164,15 @@ function drawRouteOnPage(routeModel) {
     page_data.mapInfo.drawRoute(routeModel);
 }
 
+
+function initUserMapOnUserListPage() {
+    page_data.mapInfo = new MapInfo({mapDomElement: getMapDomElement()})
+}
+
 function getMapDomElement() {
     return document.getElementById("mapForRoute");
 }
+
 //endregion
 
 

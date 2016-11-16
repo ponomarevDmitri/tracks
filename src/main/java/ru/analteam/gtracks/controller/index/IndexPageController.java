@@ -30,7 +30,7 @@ public class IndexPageController {
 
     @RequestMapping("/routs_editor")
     public String routsEditor(@AuthenticationPrincipal UserDetails userDetails){
-        return "routs_editor";
+        return "routes_editor";
     }
 
     //may need to use ServletContext context

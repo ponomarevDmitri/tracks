@@ -13,7 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/static/assets/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/assets/css/wellcome.css" rel="stylesheet">
-    <link href="/static/assets/css/routs_editor.css" rel="stylesheet">
+    <link href="/static/assets/css/routes_editor.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -123,32 +123,32 @@
                     <span style = "float:left">Результаты поиска</span>
                     <span style = "float:right">1-10</span>
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 1
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 2
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 3
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 4
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 6
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 7
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 8
                 </div>
-                <div class = "routs_item">
+                <div class = "routes_item">
                     маршрут 9
                 </div>
 
-                <div class = "routs_item" id = "search_results_pages">
+                <div class = "routes_item" id = "search_results_pages">
                     <ul class="pagination">
                         <li class="disabled"><a href="#">&laquo;</a></li>
                         <li class="active"><a href="#">1</a></li>
