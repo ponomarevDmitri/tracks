@@ -1,6 +1,4 @@
-.idea/*
-classes/*
-target/*
 tracks.iml
-
-
+.idea/
+classes/
+target/
