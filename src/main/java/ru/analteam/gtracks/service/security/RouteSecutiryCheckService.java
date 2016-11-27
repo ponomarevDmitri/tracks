@@ -16,4 +16,10 @@ public class RouteSecutiryCheckService {
                                    @NotNull Route route) {
         // todo checks that user has read access to route
     }
+    public void assertAccessToCreate(@NotNull SecUser user) {
+        // todo checks that user has read access to route
+    }
+    public void assertAccessToLoad(@NotNull SecUser user) {
+        // todo checks that user has read access to route
+    }
 }

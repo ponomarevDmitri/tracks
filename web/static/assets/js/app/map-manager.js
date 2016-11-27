@@ -97,6 +97,67 @@ function MapInfo(mapInfoParameters) {
     }
 
     // region PUBLIC MapInfo members
+
+    this.enableAddPointMode = function () {
+        if (!this.polyline) {
+            this.createAndAddRoutePolilyne();
+        }
+        // Add a listener for the click event
+        this.map.addListener('click', this.addLatLngFromEvent);
+    };
+
+    // Handles click events on a map, and adds a new point to the Polyline.
+    this.addLatLngFromEvent = function (event) {
+
+        var coordinates = {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
+        };
+
+        this.addLatLngFromCoordinates(coordinates);
+    };
+
+    /**
+     * Отрисовывает точку на карте, добавляет клиентскую модель точки в mapInfo
+     * @param coordinates объект координат в формате {lat: 11, lng: 12}
+     */
+    this.addLatLngFromCoordinates = function (coordinates) {
+        var path = this.polyline.getPath();
+        // Because path is an MVCArray, we can simply append a new coordinate
+        // and it will automatically appear.
+        path.push({
+            lat: function () {
+                return coordinates.lat;
+            },
+            lng: function () {
+                return coordinates.lng;
+            }
+
+        });
+
+        // Add a new marker at the new plotted point on the polyline.
+        var marker = new google.maps.Marker({
+            position: coordinates,
+            title: '#' + path.getLength(),
+            map: this.map
+        });
+        this.routeModel.points.push(new RoutePointModel(coordinates, "", "", ""))
+    };
+
+    this.disableAddPointMode = function () {
+        this.map.addListener('click', null);
+    };
+
+    this.createAndAddRoutePolilyne = function () {
+        var poly = new google.maps.Polyline({
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+        });
+        poly.setMap(this.map);
+        this.polyline = poly;
+    };
+
     /**
      * Удаляет линию на карте.
      */
@@ -443,6 +504,9 @@ function initUserMap(domElement) {
     return mapInfo;
 }
 
+
+//region deprecated method (must be carefully removed)
+
 function enableAddPointMode() {
     enableAddPointModeToMapInfo(mapInfo);
 }
@@ -453,6 +517,10 @@ function enableAddPointModeToMapInfo(mapInfo) {
     }
     // Add a listener for the click event
     mapInfo.map.addListener('click', addLatLngFromEvent);
+}
+
+function disableAddPointModeToMapInfo(mapInfo) {
+    mapInfo.map.addListener('click', null);
 }
 
 function createAndAddRoutePolilyne(mapInfo) {
@@ -503,6 +571,7 @@ function addLatLngFromCoordinates(coordinates, mapInfo) {
     });
     mapInfo.routeModel.points.push(new RoutePointModel(coordinates, "", "", ""))
 }
+//endregion
 
 /**
  * Итерирутеся через массив mapInfo.routeModel.points: для каждой точки отрисовывает её на карте,

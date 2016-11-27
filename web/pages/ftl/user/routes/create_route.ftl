@@ -21,7 +21,8 @@
     <script src="/static/assets/js/app/map-manager.js"></script>
 
     <link href="/static/assets/css/routes_editor.css" rel="stylesheet">
-    <script src="/static/assets/js/pages/user_route_list.js"></script>
+    <link href="/static/assets/css/create_route.css" rel="stylesheet">
+    <script src="/static/assets/js/pages/create_route.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -37,11 +38,11 @@
     <style id="holderjs-style" type="text/css"></style>
 
     <script>
-        $(document).ready(function () {
+       /* $(document).ready(function () {
             drawUsersRouteListNew($("#userRouteListContainer"));
 
         });
-
+*/
         function initMap() {
             initUserMapOnUserListPage();
         }
@@ -93,8 +94,42 @@
 </div>
 <body>
 
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://bootstrap-3.ru/examples/jumbotron/#">TrucksHuyaks</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="main_page">Маршруты</a></li>
+                <li ><a href="stat_table">Прочее</a></li>
+                <li><a href="http://bootstrap-3.ru/examples/starter-template/#about">О проекте</a></li>
+            </ul>
 
-<#include "/templates/ftl/UserNavigationBar.ftl">
+            <ul  class="nav navbar-nav navbar-right"  >
+
+                <li ><a style = "height:40px; margin:5px;line-height:8px;color:white" id="signup-header-btn" class="btn btn-success signupbtn" href="https://snappa.io/#" data-toggle="modal" data-target="#loginModal" data-action="signup-form">Войти</a></li>
+
+            </ul>
+            <div class = "navbar-text navbar-right"></div>
+            <div class = "navbar-text navbar-right"></div>
+
+            <div class = "navbar-text navbar-right" ><a href="#myModal"  data-toggle="modal">RU</a></div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
 
 
 <!-- Marketing messaging and featurettes
@@ -105,22 +140,33 @@
 
     <!-- Three columns of text below the carousel -->
     <div class="row" id = "row1">
-        здесь будут дохуя вских рахных фильтров
+        <input type="text" class="form-control" placeholder="Название создаваемого маршрута" aria-describedby="basic-addon2">
     </div><!-- /.row -->
     <div class="row" id = "row2">
         <div class  = "col-lg-9 col-md-8" id = "route_name_label_wrapper">
-            сюда вставлять карту
             <div id="mapForRoute" style="width: 400px; height: 400px;">
 
             </div>
         </div>
         <div class  = "col-lg-3 col-md-4" id = "route_desc_edit_wrapper">
             <div id = "route_list_wrapper">
-                <div id = "search_results_head">
-                    <span style = "float:left">Результаты поиска</span>
-                    <span style = "float:right">1-10</span>
+                <div id = "editRouteToolsPane" style="margin: 15px 2px;">
+                    <div >Редактирование точки маршрута</div>
+                    <div id="editRouteToolsContainer" >
+                        <div id="editCurrentPointButtons" class="actions-with-route-point-button-group" style="display: none">
+                            <span title="Добавить подробное описание" class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                            <span title="Удалить точку" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </div>
+                        <div id="createNewPointButtons" class="actions-with-route-point-button-group">
+                            <button id="createNewPointButton" type="button" class="btn btn-primary create-new-point-button"
+                                    onclick="switchEnableAddPointMode($('#createNewPointButton').attr('aria-pressed'));"
+                                    data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <span title="Добавить точку" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div  id = "search_results_head">
+                <div id = "search_results_head" >
                     <a href="/user/route/create" style = "float:left">Добавить маршрут</a>
                 </div>
                 <div id="userRouteListContainer">

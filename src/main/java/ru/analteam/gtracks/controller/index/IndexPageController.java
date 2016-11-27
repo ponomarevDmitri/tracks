@@ -28,7 +28,12 @@ public class IndexPageController {
         return "wellcome_page";
     }
 
-    @RequestMapping("/routs_editor")
+    /**
+     * common route search list
+     * @param userDetails
+     * @return
+     */
+    @RequestMapping("/routes_search")
     public String routsEditor(@AuthenticationPrincipal UserDetails userDetails){
         return "routes_editor";
     }

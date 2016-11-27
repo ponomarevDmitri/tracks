@@ -1,0 +1,9 @@
+.actions-with-route-point-button-group {
+    margin: 15px 2px;
+}
+
+.create-new-point-button {
+    background: white;
+    color: inherit;
+    border-color: grey;
+}

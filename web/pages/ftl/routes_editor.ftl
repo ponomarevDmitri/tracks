@@ -123,6 +123,10 @@
                     <span style = "float:left">Результаты поиска</span>
                     <span style = "float:right">1-10</span>
                 </div>
+                <div  id = "search_results_head">
+                    <span style = "float:left">Добавить маршрут</span>
+                    <span style = "float:right">1-10</span>
+                </div>
                 <div class = "routes_item">
                     маршрут 1
                 </div>

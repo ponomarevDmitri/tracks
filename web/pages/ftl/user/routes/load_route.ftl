@@ -36,19 +36,25 @@
     </style>
 </head>
 <body>
-<nav>
 <#include "/templates/ftl/UserNavigationBar.ftl">
-</nav>
 
 <h1>SOME user PAGE asd112</h1>
 
 <div class="container">
     <div class="row">
     <#--todo -->
+        <div>
+            <label class="btn btn-default btn-file">
+                Browse <input type="file" style="display: none;">
+            </label>
+        </div>
     </div>
     <footer>
     <#include "/templates/ftl/UserFooter.ftl">
     </footer>
+
+
+
 
 
 </div>
