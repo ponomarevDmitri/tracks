@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet id="3" author="d.ponomarev">
+
+        <createTable tableName="user_routes">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints foreignKeyName="FK_user_routes_2_sec_user"/>
+            </column>
+            <column name="route_id" type="int">
+                <constraints foreignKeyName="FK_user_routes_2_route"/>
+
+            </column>
+
+        </createTable>
+        <addForeignKeyConstraint baseTableName="user_routes" baseColumnNames="user_id"
+                                 constraintName="FK_user_routes_2_sec_user"
+                                 referencedTableName="sec_user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_routes" baseColumnNames="route_id"
+                                 constraintName="FK_user_routes_2_route"
+                                 referencedTableName="route"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>

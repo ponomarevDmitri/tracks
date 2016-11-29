@@ -15,6 +15,10 @@
     <link href="/static/assets/bootstrap-3.3.6/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 <#--endregion-->
 
+<#--region custom js files-->
+    <script src="/static/assets/js/pages/user/routes/load_route.js"></script>
+<#--endregion -->
+
     <script>
         function initMap() {
             initUserMapByElemId("map");
@@ -42,21 +46,18 @@
 
 <div class="container">
     <div class="row">
-    <#--todo -->
         <div>
-            <label class="btn btn-default btn-file">
-                Browse <input type="file" style="display: none;">
-            </label>
+            <form action="/user/route/upload" method="post" enctype="multipart/form-data" id="image_upload" name="image_upload">
+                <label class="btn btn-default btn-file">
+                    Browse <input type="file" style="display: none;" name="routeData">
+                </label>
+                <input type="submit">
+            </form>
         </div>
     </div>
     <footer>
     <#include "/templates/ftl/UserFooter.ftl">
     </footer>
-
-
-
-
-
 </div>
 </body>
 </html>

@@ -1,5 +1,8 @@
 package ru.analteam.gtracks.model.security;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -74,7 +77,8 @@ public class SecUser {
         this.password = password;
     }
 
-    @ManyToMany(targetEntity = SecRole.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = SecRole.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<SecRole> getRoles() {
         return roles;
     }

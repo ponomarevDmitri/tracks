@@ -16,5 +16,8 @@
     
     <include file="liquibase/v000/init_db_changelog.xml"/>
     <include file="liquibase/v000/create_route_tables.xml"/>
+
     <include file="liquibase/v001/1_create_user_routes_table.xml"/>
+    <include file="liquibase/v001/2_alter_route_points_and_coordinates.xml"/>
+
 </databaseChangeLog>

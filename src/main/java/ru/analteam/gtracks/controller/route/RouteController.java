@@ -1,9 +1,13 @@
 package ru.analteam.gtracks.controller.route;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.analteam.gtracks.model.route.Route;
 import ru.analteam.gtracks.service.route.RouteService;
@@ -51,5 +55,11 @@ public class RouteController {
         routeSecutiryCheckService.assertAccessToCreate(userService.getCurrentUser());
 
         return new ModelAndView("/user/routes/load_route");
+    }
+
+    @RequestMapping(value = "upload", method = {RequestMethod.POST, RequestMethod.PUT}, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ModelAndView uploadRouteMultipart(@RequestParam("routeData") MultipartFile routeDataFile) {
+        int i = 9;
+        return new ModelAndView();
     }
 }

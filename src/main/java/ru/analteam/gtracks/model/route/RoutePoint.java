@@ -1,5 +1,8 @@
 package ru.analteam.gtracks.model.route;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 
 /**
@@ -16,6 +19,8 @@ public class RoutePoint {
 
     private String shortDescription;
     private String description;
+
+    private DateTime moment;
 
 
     @Id
@@ -74,5 +79,17 @@ public class RoutePoint {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Basic
+    @Column(name="moment")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+//    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    public DateTime getMoment() {
+        return moment;
+    }
+
+    public void setMoment(DateTime moment) {
+        this.moment = moment;
     }
 }

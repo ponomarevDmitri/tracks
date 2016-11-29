@@ -21,10 +21,17 @@ public class GeoCoordinate {
 
     private Double latitude;
     private Double longitude;
+    private Double elevation;
 
     public GeoCoordinate(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public GeoCoordinate(Double latitude, Double longitude, Double elevation) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.elevation = elevation;
     }
 
     public GeoCoordinate() {
@@ -56,5 +63,14 @@ public class GeoCoordinate {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    @Column(name = "elevation")
+    public Double getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(Double elevation) {
+        this.elevation = elevation;
     }
 }

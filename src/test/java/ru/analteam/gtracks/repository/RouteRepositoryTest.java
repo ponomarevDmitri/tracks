@@ -30,10 +30,10 @@ public class RouteRepositoryTest {
     @Transactional
     public void testCreateAndFetchCoordinates() throws Exception {
         Route route = new Route();
-        List<RoutePoint> points = new ArrayList<RoutePoint>();
+        List<RoutePoint> points = new ArrayList<>();
 
         RoutePoint e = new RoutePoint();
-        e.setGeoCoordinate(new GeoCoordinate(12.3212, 1232.131));
+        e.setGeoCoordinate(new GeoCoordinate(12.3212, 1232.131, 12.0));
         points.add(e);
 
         e = new RoutePoint();
@@ -54,5 +54,6 @@ public class RouteRepositoryTest {
 
         Assert.assertNotNull(route);
         Assert.assertTrue(route.getRoutePoints().get(0).getGeoCoordinate().getLatitude().equals(12.3212));
+        Assert.assertTrue(route.getRoutePoints().get(0).getGeoCoordinate().getElevation().equals(12.0));
     }
 }

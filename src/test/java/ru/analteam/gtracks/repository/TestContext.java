@@ -30,7 +30,7 @@ public class TestContext {
 //        ds.setPassword("baikal11");
 
 //        ds.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
-        ds.setUrl("jdbc:mysql://localhost:3306/test_schema");
+        ds.setUrl("jdbc:mysql://localhost:3306/test_schema_2");
         ds.setUsername("root");
         ds.setPassword("baikal11");
 

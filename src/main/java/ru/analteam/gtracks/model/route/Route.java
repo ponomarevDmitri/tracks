@@ -1,5 +1,7 @@
 package ru.analteam.gtracks.model.route;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import ru.analteam.gtracks.model.security.SecUser;
 
 import javax.persistence.*;
@@ -32,7 +34,8 @@ public class Route {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<RoutePoint> getRoutePoints() {
         return routePoints;
     }
