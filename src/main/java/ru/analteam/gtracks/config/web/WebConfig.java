@@ -27,6 +27,8 @@ import java.util.Map;
 @ComponentScan({"ru.analteam.gtracks.controller"})
 public class WebConfig extends WebMvcConfigurerAdapter{
 
+    private static long MAX_UPLOAD_FILE_SIZE = 100000000l;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // relatively root of .war archive
@@ -36,7 +38,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(100000000l);
+        multipartResolver.setMaxUploadSize(MAX_UPLOAD_FILE_SIZE);
         return multipartResolver;
     }
 
