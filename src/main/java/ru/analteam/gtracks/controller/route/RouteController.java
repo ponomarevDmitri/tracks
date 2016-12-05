@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.analteam.gtracks.model.route.Route;
+import ru.analteam.gtracks.model.security.SecUser;
 import ru.analteam.gtracks.service.route.RouteService;
 import ru.analteam.gtracks.service.security.RouteSecutiryCheckService;
 import ru.analteam.gtracks.service.user.UserService;
+
+import java.util.HashMap;
 
 /**
  * Created by dima-pc on 23.10.2016.
@@ -34,15 +37,16 @@ public class RouteController {
     public ModelAndView editRoute(@PathVariable("id") Long routeId){
         Route routeById = routeService.getRouteById(routeId);
 
-
         routeSecutiryCheckService.assertAccessToRead(userService.getCurrentUser(),
                 routeById);
-        return new ModelAndView("/user/routes/edit_route");
+
+        return new ModelAndView("/user/routes/edit_route", new HashMap<String, Object>(){{
+                    put("route", routeById);
+                }});
     }
 
     @RequestMapping("create")
     public ModelAndView createRoute(){
-
 
         routeSecutiryCheckService.assertAccessToCreate(userService.getCurrentUser());
 
@@ -59,6 +63,11 @@ public class RouteController {
 
     @RequestMapping(value = "upload", method = {RequestMethod.POST, RequestMethod.PUT}, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ModelAndView uploadRouteMultipart(@RequestParam("routeData") MultipartFile routeDataFile) {
+        SecUser currentUser = userService.getCurrentUser();
+        routeSecutiryCheckService.assertAccessToCreate(currentUser);
+
+        Route route = routeService.loadRoute(routeDataFile, currentUser);
+
         int i = 9;
         return new ModelAndView();
     }

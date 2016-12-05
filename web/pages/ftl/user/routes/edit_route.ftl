@@ -13,7 +13,14 @@
     <!-- Bootstrap core CSS -->
     <link href="/static/assets/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/assets/css/wellcome.css" rel="stylesheet">
+
+
+    <script src="/static/assets/js/jquery/jquery-1.12.3.js"></script>
+    <script src="/static/assets/js/app/map-manager.js"></script>
+
     <link href="/static/assets/css/routes_editor.css" rel="stylesheet">
+    <link href="/static/assets/css/create_route.css" rel="stylesheet">
+    <script src="/static/assets/js/pages/create_route.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -26,7 +33,19 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/carousel.css" rel="stylesheet">
-    <style id="holderjs-style" type="text/css"></style></head>
+    <style id="holderjs-style" type="text/css"></style>
+
+    <script>
+        /* $(document).ready(function () {
+             drawUsersRouteListNew($("#userRouteListContainer"));
+
+         });
+ */
+        function initMap() {
+            initUserMapOnUserListPage();
+        }
+    </script>
+
 <!-- NAVBAR
 ================================================== -->
 <div class="modal fade" id="myModal">
