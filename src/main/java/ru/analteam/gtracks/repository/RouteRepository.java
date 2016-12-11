@@ -44,4 +44,10 @@ public class RouteRepository implements IRouteRepository {
         return route;
     }
 
+    @Override
+    public Route update(Route route) {
+        route = em.merge(route);
+        em.flush();
+        return route;
+    }
 }

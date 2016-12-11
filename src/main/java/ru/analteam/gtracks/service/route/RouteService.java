@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.analteam.gtracks.exception.AccessToRouteDenied;
+import ru.analteam.gtracks.model.merger.RouteMerger;
 import ru.analteam.gtracks.model.route.Route;
 import ru.analteam.gtracks.model.route.UserRoutes;
 import ru.analteam.gtracks.model.security.SecUser;
@@ -33,6 +34,8 @@ public class RouteService {
     @Autowired
     private IRouteLoaderFactory routeLoaderFactory;
 
+    private RouteMerger routeMerger = new RouteMerger();
+
     @Nullable
     public Route getRouteByIdWithPermissionCheck(Long id, SecUser user) throws AccessToRouteDenied {
         Route routeById = getRouteById(id);
@@ -50,6 +53,13 @@ public class RouteService {
 
     public Route createRoute(Route route) {
         return routeRepository.create(route);//todo create (done?)
+    }
+
+    public Route mergeAndUpdate(Long routeId, Route newRoute) {
+        Route route2Update = routeRepository.getRouteById(routeId);
+        routeMerger.merge(route2Update, newRoute);
+        route2Update = routeRepository.update(route2Update);
+        return route2Update;
     }
 
     public List<Route> listUserRoutes(SecUser secUser){

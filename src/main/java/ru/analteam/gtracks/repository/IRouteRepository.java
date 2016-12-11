@@ -11,4 +11,5 @@ public interface IRouteRepository {
     Route getRouteById(Long routeId);
     List<Route> getRouteListByIds(List<Long> routeIdList);
     Route create(Route route);
+    Route update(Route route);
 }

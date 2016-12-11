@@ -19,6 +19,7 @@
 
     <script src="/static/assets/js/jquery/jquery-1.12.3.js"></script>
     <script src="/static/assets/js/app/map-manager.js"></script>
+    <script src="/static/assets/js/pages/common/map-dom-integration.js"></script>
 
     <link href="/static/assets/css/routes_editor.css" rel="stylesheet">
     <script src="/static/assets/js/pages/user_route_list.js"></script>
@@ -38,7 +39,8 @@
 
     <script>
         $(document).ready(function () {
-            drawUsersRouteListNew($("#userRouteListContainer"));
+//            drawUsersRouteListNew($("#userRouteListContainer"));
+            drawUsersRouteListNew(document.getElementById("userRouteListContainer"));
 
         });
 

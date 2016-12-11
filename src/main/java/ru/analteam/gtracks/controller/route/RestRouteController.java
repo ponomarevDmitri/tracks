@@ -47,6 +47,16 @@ public class RestRouteController {
         return new ResponseEntity<>(routeDto, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RouteDto> saveRoute(@RequestBody RouteDto routeDto,
+                                              @PathVariable(name = "id") Long routeId) {
+        Route newTransinetRoute = toRouteConverter.convert(routeDto, userService.getCurrentUser());
+
+        Route updatedRoute = routeService.mergeAndUpdate(routeId, newTransinetRoute);
+
+        return new ResponseEntity<>(toRouteDtoConverter.convert(updatedRoute), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<RouteDto> getRoute(@PathVariable("id") Long routeId) {
         ResponseEntity<RouteDto> result;

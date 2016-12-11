@@ -33,8 +33,8 @@ public class RoutePoint {
         this.id = id;
     }
 
-    @ManyToOne(targetEntity = Route.class)
-    @JoinColumn(name = "route_id")
+    @ManyToOne
+    @JoinColumn(name = "route_id", nullable = false)
     public Route getRoute() {
         return route;
     }

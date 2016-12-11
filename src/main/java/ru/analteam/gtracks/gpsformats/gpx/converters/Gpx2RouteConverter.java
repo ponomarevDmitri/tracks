@@ -21,7 +21,7 @@ import java.util.stream.Collector;
  */
 public class Gpx2RouteConverter {
     public Route convert(Gpx gpx) {
-        Route route = new Route();
+        final Route route = new Route();
 
 
         Collector<Trkpt, List<RoutePoint>, List<RoutePoint>> routePointListTransformer = new Collector<Trkpt, List<RoutePoint>, List<RoutePoint>>() {
@@ -33,12 +33,13 @@ public class Gpx2RouteConverter {
 
             @Override
             public BiConsumer<List<RoutePoint>, Trkpt> accumulator() {
-                return (routePoints1, trkpt) -> {
+                return (resultRoutePoints, trkpt) -> {
                     RoutePoint newPoint = convertPointPartitially(trkpt);
-                    if (routePoints1.size() > 0) {
-                        routePoints1.get(routePoints1.size() - 1).setNextPoint(newPoint);
+                    newPoint.setRoute(route);
+                    if (resultRoutePoints.size() > 0) {
+                        resultRoutePoints.get(resultRoutePoints.size() - 1).setNextPoint(newPoint);
                     }
-                    routePoints1.add(newPoint);
+                    resultRoutePoints.add(newPoint);
                 };
             }
 

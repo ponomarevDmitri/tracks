@@ -75,6 +75,30 @@ function drawRouteOnPage(routeModel) {
     page_data.mapInfo.drawRoute(routeModel);
 }
 
+function initMapAndLoadRoute(routeId) {
+    initUserMapOnUserListPage();
+
+    $.ajax({
+        url: "/routes/" + routeId,
+        success: function (data) {
+            drawRouteOnPage(convertFromServerRouteModel(data));
+            //todo init route points elements
+            //todo handle errors
+        }
+    });
+}
+
+function saveRoute() {
+    page_data.mapInfo
+    $.ajax({
+        url: "/routes/" + routeId,
+        success: function (data) {
+            drawRouteOnPage(convertFromServerRouteModel(data));
+            //todo init route points elements
+            //todo handle errors
+        }
+    });
+}
 
 function initUserMapOnUserListPage() {
     var mapDomElement = getMapDomElement();

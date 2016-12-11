@@ -26,8 +26,6 @@
     </script>
 
 <#--todo make getting google script from the server (for security reasons)-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
-            async defer></script>
 <#--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo"-->
 <#--></script>-->
     <style>

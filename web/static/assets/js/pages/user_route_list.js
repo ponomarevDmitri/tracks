@@ -77,11 +77,30 @@ function drawRouteOnPage(routeModel) {
 
 
 function initUserMapOnUserListPage() {
-    page_data.mapInfo = new MapInfo({mapDomElement: getMapDomElement()})
+    var mapDomElement = getMapDomElement();
+
+    prepareMapContaner();
+
+    page_data.mapInfo = new MapInfo({mapDomElement: mapDomElement})
+}
+
+
+function prepareMapContaner() {
+    var mapContainerWrapper = $("#route_name_label_wrapper");
+    $("#" + getMapElementIdentifier()).width(mapContainerWrapper.width());
+    $("#" + getMapElementIdentifier()).height(mapContainerWrapper.height());
 }
 
 function getMapDomElement() {
-    return document.getElementById("mapForRoute");
+    return document.getElementById(getMapElementIdentifier());
+}
+
+function getMapDomElement() {
+    return document.getElementById(getMapElementIdentifier());
+}
+
+function getMapElementIdentifier() {
+    return "mapForRoute";
 }
 
 //endregion

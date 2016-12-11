@@ -40,9 +40,7 @@ public class RouteController {
         routeSecutiryCheckService.assertAccessToRead(userService.getCurrentUser(),
                 routeById);
 
-        return new ModelAndView("/user/routes/edit_route", new HashMap<String, Object>(){{
-                    put("route", routeById);
-                }});
+        return getEditPageModelAndView(routeById);
     }
 
     @RequestMapping("create")
@@ -68,7 +66,12 @@ public class RouteController {
 
         Route route = routeService.loadRoute(routeDataFile, currentUser);
 
-        int i = 9;
-        return new ModelAndView();
+        return getEditPageModelAndView(route);
+    }
+
+    private ModelAndView getEditPageModelAndView(final Route route) {
+        return new ModelAndView("/user/routes/edit_route", new HashMap<String, Object>(){{
+            put("route", route);
+        }});
     }
 }

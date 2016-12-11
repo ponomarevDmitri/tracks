@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="route" type="ru.analteam.gtracks.model.route.Route" -->
 <!DOCTYPE html>
 <!-- saved from url=(0040)http://bootstrap-3.ru/examples/carousel/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,7 +21,8 @@
 
     <link href="/static/assets/css/routes_editor.css" rel="stylesheet">
     <link href="/static/assets/css/create_route.css" rel="stylesheet">
-    <script src="/static/assets/js/pages/create_route.js"></script>
+    <#--<script src="/static/assets/js/pages/create_route.js"></script>-->
+    <script src="/static/assets/js/pages/edit_route.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -42,9 +44,13 @@
          });
  */
         function initMap() {
-            initUserMapOnUserListPage();
+            initMapAndLoadRoute(${route.id});
         }
     </script>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOSXCtPQOP1QJxTZnsJnmUZjQSkGWztIo&callback=initMap"
+            async defer></script>
 
 <!-- NAVBAR
 ================================================== -->
@@ -129,46 +135,43 @@
 <div class="container" id  = "main_container">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row" id = "row1">
-        здесь будут дохуя вских рахных фильтров
+    <div class="row" id = "routeNameContainer">
+        <input type="text" class="form-control" placeholder="Название создаваемого маршрута" aria-describedby="basic-addon2">
     </div><!-- /.row -->
     <div class="row" id = "row2">
         <div class  = "col-lg-9 col-md-8" id = "route_name_label_wrapper">
-            сюда вставлять карту
+            <div id="mapForRoute" style="width: 400px; height: 400px;">
+
+            </div>
         </div>
         <div class  = "col-lg-3 col-md-4" id = "route_desc_edit_wrapper">
-            <div id = "wrapper">
-                <div  id = "search_results_head">
-                    <span style = "float:left">Результаты поиска</span>
-                    <span style = "float:right">1-10</span>
+            <div id = "route_list_wrapper">
+                <div id = "editRouteToolsPane" style="margin: 15px 2px;">
+                    <div >Редактирование точки маршрута</div>
+                    <div id="editRouteToolsContainer" >
+                        <div id="editCurrentPointButtons" class="actions-with-route-point-button-group" style="display: none">
+                            <span title="Добавить подробное описание" class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                            <span title="Удалить точку" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </div>
+                        <div id="createNewPointButtons" class="actions-with-route-point-button-group">
+                            <button id="createNewPointButton" type="button" class="btn btn-primary create-new-point-button"
+                                    onclick="switchEnableAddPointMode($('#createNewPointButton').attr('aria-pressed'));"
+                                    data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <span title="Добавить точку" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div  id = "search_results_head">
-                    <span style = "float:left">Добавить маршрут</span>
-                    <span style = "float:right">1-10</span>
+                <div id = "search_results_head" >
+                    <a href="/user/route/create" style = "float:left">Добавить маршрут</a>
                 </div>
-                <div class = "routes_item">
-                    маршрут 1
-                </div>
-                <div class = "routes_item">
-                    маршрут 2
-                </div>
-                <div class = "routes_item">
-                    маршрут 3
-                </div>
-                <div class = "routes_item">
-                    маршрут 4
-                </div>
-                <div class = "routes_item">
-                    маршрут 6
-                </div>
-                <div class = "routes_item">
-                    маршрут 7
-                </div>
-                <div class = "routes_item">
-                    маршрут 8
-                </div>
-                <div class = "routes_item">
-                    маршрут 9
+                <div id="userRouteListContainer">
+                <#--<div class = "routes_item">
+                        маршрут 1
+                    </div>
+                    <div class = "routes_item">
+                        маршрут 2
+                    </div>-->
                 </div>
 
                 <div class = "routes_item" id = "search_results_pages">
@@ -184,20 +187,19 @@
 
                 </div>
             </div>
+            <input type="button" class="button button-primary button-large"
+                   onclick="saveRoute();" value="Сохранить">
 
         </div>
 
 
     </div><!-- /.row -->
 
-
     <!-- /END THE FEATURETTES -->
 
-
-
-
-
 </div><!-- /.container -->
+
+
 <!-- FOOTER -->
 <footer id = "footer">
     <div class = "container">
