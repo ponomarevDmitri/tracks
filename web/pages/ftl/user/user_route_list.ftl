@@ -111,7 +111,6 @@
     </div><!-- /.row -->
     <div class="row" id = "row2">
         <div class  = "col-lg-9 col-md-8" id = "route_name_label_wrapper">
-            сюда вставлять карту
             <div id="mapForRoute" style="width: 400px; height: 400px;">
 
             </div>

@@ -73,12 +73,22 @@ public class RoutePoint {
 
     @Transient
     public String getShortDescription() {
-        return getPointDescription().getShortDescription();
+        RoutePointDescription pointDescription = getPointDescription();
+        if (pointDescription != null) {
+            return pointDescription.getShortDescription();
+        } else {
+            return null;
+        }
     }
 
     @Transient
     public String getDescription() {
-        return getPointDescription().getDescription();
+        RoutePointDescription pointDescription = getPointDescription();
+        if (pointDescription != null) {
+            return pointDescription.getDescription();
+        } else {
+            return null;
+        }
     }
 
     @Basic

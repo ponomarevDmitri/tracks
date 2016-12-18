@@ -73,6 +73,8 @@ function drawRouteOnPage(routeModel) {
     //    mapJDom.setAttribute("hidden", "false");
     //}
     page_data.mapInfo.drawRoute(routeModel);
+
+    $("#routeNameInput").val(routeModel.name);
 }
 
 function initMapAndLoadRoute(routeId) {
@@ -88,16 +90,17 @@ function initMapAndLoadRoute(routeId) {
     });
 }
 
-function saveRoute() {
-    page_data.mapInfo
-    $.ajax({
+function saveRouteFromPage() {
+    saveRoute(page_data.mapInfo);
+
+    /*$.ajax({
         url: "/routes/" + routeId,
         success: function (data) {
             drawRouteOnPage(convertFromServerRouteModel(data));
             //todo init route points elements
             //todo handle errors
         }
-    });
+    });*/
 }
 
 function initUserMapOnUserListPage() {
@@ -133,7 +136,9 @@ function switchEnableAddPointMode(isEnabled) {
 
 }
 
-
+function updateRouteName(routeName) {
+    page_data.mapInfo.routeModel.name = routeName;
+}
 //endregion
 
 

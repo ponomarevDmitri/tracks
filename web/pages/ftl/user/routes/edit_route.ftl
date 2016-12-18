@@ -136,7 +136,8 @@
 
     <!-- Three columns of text below the carousel -->
     <div class="row" id = "routeNameContainer">
-        <input type="text" class="form-control" placeholder="Название создаваемого маршрута" aria-describedby="basic-addon2">
+        <input id="routeNameInput" type="text" class="form-control" placeholder="Название создаваемого маршрута"
+               aria-describedby="basic-addon2" onchange="updateRouteName($('#routeNameInput').val());">
     </div><!-- /.row -->
     <div class="row" id = "row2">
         <div class  = "col-lg-9 col-md-8" id = "route_name_label_wrapper">
@@ -188,7 +189,7 @@
                 </div>
             </div>
             <input type="button" class="button button-primary button-large"
-                   onclick="saveRoute();" value="Сохранить">
+                   onclick="saveRouteFromPage();" value="Сохранить">
 
         </div>
 

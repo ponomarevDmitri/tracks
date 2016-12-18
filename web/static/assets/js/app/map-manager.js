@@ -41,6 +41,7 @@ var mapRoute = {
  * @constructor
  */
 function RouteModel(name, description, shortDescription) {
+    this.id = null;
     this.name = name;
     this.description = description;
     this.shortDescription = shortDescription;
@@ -189,7 +190,7 @@ function MapInfo(mapInfoParameters) {
         var longitudes = [];
         for (var pointIndex = 0; pointIndex < points.length; pointIndex++) {
             var point = points[pointIndex];
-            this.createMarkerAndAddToPath(point);
+            this.createMarkerAndAddToPath(points, pointIndex);
             latitudes.push(point.latlng.lat);
             longitudes.push(point.latlng.lng);
         }
@@ -223,9 +224,12 @@ function MapInfo(mapInfoParameters) {
 
     /**
      * Создает маркер google-карт из объекта point
-     * @param point объект в формате {RoutePointModel}
+     * @param points объект в формате {[RoutePointModel]}
+     * @param pointIndex объект в формате {[RoutePointModel]}
      */
-    this.createMarkerAndAddToPath = function (point) {
+    this.createMarkerAndAddToPath = function (points, pointIndex) {
+        var point = points[pointIndex];
+
         var path = this.polyline.getPath();
         var coordinates = {
             lat: point.latlng.lat,
@@ -243,14 +247,17 @@ function MapInfo(mapInfoParameters) {
 
         });
 
-        // Add a new marker at the new plotted point on the polyline.
-        var marker = new google.maps.Marker({
-            position: coordinates,
-            //draggable: true,
-            title: '#' + path.getLength(),
-            map: this.map
-        });
-        this.markers.push(marker);
+        if ((point.description && point.shortDescription)
+            || pointIndex == 0
+            || pointIndex == (points.length - 1)) { // Add a new marker at the new plotted point on the polyline.
+            var marker = new google.maps.Marker({
+                position: coordinates,
+                //draggable: true,
+                title: '#' + path.getLength(),
+                map: this.map
+            });
+            this.markers.push(marker);
+        }
     };
 }
 
@@ -606,14 +613,21 @@ function saveCurrentRoute() {
 }
 
 /**
- * Saves route represented in mapInfo paremeter
+ * Tries to update existring route if such has an id or else Saves route represented in mapInfo parameter.
  * @param mapInfo {MapInfo}
  */
 function saveRoute(mapInfo) {
+    var url = "/routes";
+
+    var routeModel = mapInfo.routeModel;
+    if (routeModel.id) {
+        url += "/" + routeModel.id;
+    }
+
     $.ajax({
         type: "PUT",
-        url: "/routes",
-        data: JSON.stringify(convert2ServerRouteModel(mapInfo.routeModel)),
+        url: url,
+        data: JSON.stringify(convert2ServerRouteModel(routeModel)),
         dataType: "json",
         contentType: "application/json"
     })
