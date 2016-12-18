@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="4" author="d.ponomarev" >
+        <comment>This changelog moves point descriptions (of table route_pont)
+            to separate table (route_point_description).</comment>
+        
+        <createTable tableName="route_point_description" >
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="short_description" type="varchar(1024)"/>
+            <column name="description" type="TEXT"/>
+            <column name="route_point_id" type="int">
+                <constraints foreignKeyName="FK_route_point_description_2_route_point"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="route_point_description" baseColumnNames="route_point_id"
+                                 constraintName="FK_route_point_description_2_route_point"
+                                 referencedTableName="route_pont"
+                                 referencedColumnNames="id"/>
+        <sqlFile  path="/sql/1_translate_point_descriptions_to_separate_table.sql" relativeToChangelogFile="true"/>
+        <!--<sqlFile  path="/sql/1_translate_point_descriptions_to_separate_table.sql" />-->
+
+        <dropColumn tableName="route_pont" columnName="description"/>
+        <dropColumn tableName="route_pont" columnName="short_description"/>
+    </changeSet>
+</databaseChangeLog>

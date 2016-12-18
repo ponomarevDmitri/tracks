@@ -17,8 +17,7 @@ public class RoutePoint {
     private GeoCoordinate geoCoordinate;
     private RoutePoint nextPoint;
 
-    private String shortDescription;
-    private String description;
+    private RoutePointDescription pointDescription;
 
     private DateTime moment;
 
@@ -63,22 +62,23 @@ public class RoutePoint {
         this.nextPoint = nextPoint;
     }
 
-    @Column(name  = "short_description")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "routePoint")
+    public RoutePointDescription getPointDescription() {
+        return pointDescription;
+    }
+
+    public void setPointDescription(RoutePointDescription pointDescription) {
+        this.pointDescription = pointDescription;
+    }
+
+    @Transient
     public String getShortDescription() {
-        return shortDescription;
+        return getPointDescription().getShortDescription();
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    @Column(name = "description")
+    @Transient
     public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return getPointDescription().getDescription();
     }
 
     @Basic

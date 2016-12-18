@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.analteam.gtracks.model.route.GeoCoordinate;
 import ru.analteam.gtracks.model.route.Route;
 import ru.analteam.gtracks.model.route.RoutePoint;
+import ru.analteam.gtracks.model.route.RoutePointDescription;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class RouteRepositoryTest {
 
         e = new RoutePoint();
         e.setGeoCoordinate(new GeoCoordinate(12.3212, 1232.131));
+        e.setPointDescription(new RoutePointDescription("short descr", "descr", e));
         points.add(e);
 
         points.get(0).setNextPoint(points.get(1));

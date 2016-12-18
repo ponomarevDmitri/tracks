@@ -19,5 +19,6 @@
 
     <include file="liquibase/v001/1_create_user_routes_table.xml"/>
     <include file="liquibase/v001/2_alter_route_points_and_coordinates.xml"/>
+    <include file="liquibase/v001/3_create_point_description_separate_table.xml"/>
 
 </databaseChangeLog>

@@ -6,6 +6,7 @@ import ru.analteam.gtracks.dto.RoutePointDto;
 import ru.analteam.gtracks.model.route.GeoCoordinate;
 import ru.analteam.gtracks.model.route.Route;
 import ru.analteam.gtracks.model.route.RoutePoint;
+import ru.analteam.gtracks.model.route.RoutePointDescription;
 import ru.analteam.gtracks.model.security.SecUser;
 
 import javax.annotation.Nonnull;
@@ -65,9 +66,20 @@ public class RouteDto2RouteConverter implements Converter<RouteDto, Route> {
 
         //todo: add double truncation
         result.setGeoCoordinate(new GeoCoordinate(routePointDto.getLat(), routePointDto.getLng()));
+        result.setPointDescription(createPointDescription(routePointDto, result));
+//        result.setDescription(routePointDto.getDescription());
+//        result.setShortDescription(routePointDto.getShortDescription());
+        result.setRoute(route);
+
+        return result;
+    }
+
+    private RoutePointDescription createPointDescription(RoutePointDto routePointDto, RoutePoint routePoint) {
+        RoutePointDescription result = new RoutePointDescription();
+
         result.setDescription(routePointDto.getDescription());
         result.setShortDescription(routePointDto.getShortDescription());
-        result.setRoute(route);
+        result.setRoutePoint(routePoint);
 
         return result;
     }
