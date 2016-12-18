@@ -175,7 +175,7 @@ function MapInfo(mapInfoParameters) {
 
     /**
      * Очищает карту. Отрисовывает на карте this.map клиентскую модель маршрута routeModel.
-     * @param routeModel модель маршрута в формате RouteModel
+     * @param {RouteModel} routeModel модель маршрута
      */
     this.drawRoute = function (routeModel) {
         this.deleteAllPolilines();
@@ -185,8 +185,27 @@ function MapInfo(mapInfoParameters) {
 
         var points = routeModel.points;
 
+        var latitudes = [];
+        var longitudes = [];
         for (var pointIndex = 0; pointIndex < points.length; pointIndex++) {
-            this.createMarkerAndAddToPath(points[pointIndex]);
+            var point = points[pointIndex];
+            this.createMarkerAndAddToPath(point);
+            latitudes.push(point.latlng.lat);
+            longitudes.push(point.latlng.lng);
+        }
+
+        if (latitudes.length > 0 && longitudes.length > 0) {
+            var minLng = Math.min.apply(null, longitudes);
+            var maxLat = Math.max.apply(null, latitudes);
+            var maxLng = Math.max.apply(null, longitudes);
+            var minLat = Math.min.apply(null, latitudes);
+
+            this.map.fitBounds(
+                new google.maps.LatLngBounds(
+                    {lat: maxLat, lng: minLng},
+                    {lat: minLat, lng: maxLng}));
+        } else {
+            //todo maybe center on user current position
         }
     };
 
@@ -282,38 +301,38 @@ var mapInfo = new MapInfo();
  };*/
 
 /*
-/!**
+ /!**
  * Создает маркер google-карт из объекта point
  * @param point объект в формате {RoutePointModel}
  * @param mapInfo объект mapInfo
  *!/
-function createMarkerAndAddToPath(point, mapInfo) {
-    var path = mapInfo.polyline.getPath();
-    var coordinates = {
-        lat: point.latlng.lat,
-        lng: point.latlng.lng
-    };
-    // Because path is an MVCArray, we can simply append a new coordinate
-    // and it will automatically appear.
-    path.push({
-        lat: function () {
-            return coordinates.lat;
-        },
-        lng: function () {
-            return coordinates.lng;
-        }
+ function createMarkerAndAddToPath(point, mapInfo) {
+ var path = mapInfo.polyline.getPath();
+ var coordinates = {
+ lat: point.latlng.lat,
+ lng: point.latlng.lng
+ };
+ // Because path is an MVCArray, we can simply append a new coordinate
+ // and it will automatically appear.
+ path.push({
+ lat: function () {
+ return coordinates.lat;
+ },
+ lng: function () {
+ return coordinates.lng;
+ }
 
-    });
+ });
 
-    // Add a new marker at the new plotted point on the polyline.
-    var marker = new google.maps.Marker({
-        position: coordinates,
-        //draggable: true,
-        title: '#' + path.getLength(),
-        map: mapInfo.map
-    });
-}
-*/
+ // Add a new marker at the new plotted point on the polyline.
+ var marker = new google.maps.Marker({
+ position: coordinates,
+ //draggable: true,
+ title: '#' + path.getLength(),
+ map: mapInfo.map
+ });
+ }
+ */
 
 
 //region
