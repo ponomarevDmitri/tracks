@@ -101,7 +101,7 @@ function MapInfo(mapInfoParameters) {
 
     this.enableAddPointMode = function () {
         if (!this.polyline) {
-            this.createAndAddRoutePolilyne();
+            this.createAndAddRoutePolyline();
         }
         // Add a listener for the click event
         this.map.addListener('click', this.addLatLngFromEvent);
@@ -149,7 +149,7 @@ function MapInfo(mapInfoParameters) {
         this.map.addListener('click', null);
     };
 
-    this.createAndAddRoutePolilyne = function () {
+    this.createAndAddRoutePolyline = function () {
         var poly = new google.maps.Polyline({
             strokeColor: '#000000',
             strokeOpacity: 1.0,
@@ -162,7 +162,7 @@ function MapInfo(mapInfoParameters) {
     /**
      * Удаляет линию на карте.
      */
-    this.deleteAllPolilines = function () {
+    this.deleteAllPolylines = function () {
         this.routeModel = null;
         if (this.polyline) {
             this.polyline.setMap(null);
@@ -179,8 +179,8 @@ function MapInfo(mapInfoParameters) {
      * @param {RouteModel} routeModel модель маршрута
      */
     this.drawRoute = function (routeModel) {
-        this.deleteAllPolilines();
-        createAndAddRoutePolilyne(this);
+        this.deleteAllPolylines();
+        this.createAndAddRoutePolyline(routeModel);
 
         this.routeModel = routeModel;
 
@@ -190,7 +190,7 @@ function MapInfo(mapInfoParameters) {
         var longitudes = [];
         for (var pointIndex = 0; pointIndex < points.length; pointIndex++) {
             var point = points[pointIndex];
-            this.createMarkerAndAddToPath(points, pointIndex);
+            this.createPolylinePoint(points, pointIndex);
             latitudes.push(point.latlng.lat);
             longitudes.push(point.latlng.lng);
         }
@@ -227,7 +227,7 @@ function MapInfo(mapInfoParameters) {
      * @param points объект в формате {[RoutePointModel]}
      * @param pointIndex объект в формате {[RoutePointModel]}
      */
-    this.createMarkerAndAddToPath = function (points, pointIndex) {
+    this.createPolylinePoint = function (points, pointIndex) {
         var point = points[pointIndex];
 
         var path = this.polyline.getPath();
@@ -250,97 +250,23 @@ function MapInfo(mapInfoParameters) {
         if ((point.description && point.shortDescription)
             || pointIndex == 0
             || pointIndex == (points.length - 1)) { // Add a new marker at the new plotted point on the polyline.
-            var marker = new google.maps.Marker({
-                position: coordinates,
-                //draggable: true,
-                title: '#' + path.getLength(),
-                map: this.map
-            });
+            var marker = this.doCreateMarker(coordinates, path, point);
             this.markers.push(marker);
         }
     };
+
+    this.doCreateMarker = function (coordinates, path, point) {
+        return new google.maps.Marker({
+            position: coordinates,
+            //draggable: true,
+            title: '#' + path.getLength(),
+            map: this.map
+        });
+    }
 }
 
 
 var mapInfo = new MapInfo();
-
-
-/*{
- map: undefined, // instanceof new google.maps.Map(domElement, googleMapConfig);
- polylines: [], // резерв
- polyline: undefined, //instanceof  new google.maps.Polyline
- routeModel: new RouteModel("Some route name", "descr", "shortDescr"),
-
- /!**
- * Удаляет маршрут, описанный на карте this.map и содержащийся в точках this.polyline
- *!/
- deleteAllPolilines: function () {
- this.routeModel = null;
- if (this.polyline) {
- this.polyline.setMap(null);
- this.polyline = null;
- }
- },
-
- /!**
- * Очищает карту. Отрисовывает на карте this.map клиентскую модель маршрута routeModel.
- * @param routeModel модель маршрута в формате RouteModel
- *!/
- drawRoute: function (routeModel) {
- this.deleteAllPolilines();
- createAndAddRoutePolilyne(this);
-
- this.routeModel = routeModel;
-
- var points = routeModel.points;
-
- for (var pointIndex = 0; pointIndex < points.length; pointIndex++) {
- createMarkerAndAddToPath(points[pointIndex], this);
- }
- },
-
- addPoint: function (routePointModel) {
- if (routePointModel) {
- mapInfo.routeModel.points.push(routePointModel)
-
- }
- }
- };*/
-
-/*
- /!**
- * Создает маркер google-карт из объекта point
- * @param point объект в формате {RoutePointModel}
- * @param mapInfo объект mapInfo
- *!/
- function createMarkerAndAddToPath(point, mapInfo) {
- var path = mapInfo.polyline.getPath();
- var coordinates = {
- lat: point.latlng.lat,
- lng: point.latlng.lng
- };
- // Because path is an MVCArray, we can simply append a new coordinate
- // and it will automatically appear.
- path.push({
- lat: function () {
- return coordinates.lat;
- },
- lng: function () {
- return coordinates.lng;
- }
-
- });
-
- // Add a new marker at the new plotted point on the polyline.
- var marker = new google.maps.Marker({
- position: coordinates,
- //draggable: true,
- title: '#' + path.getLength(),
- map: mapInfo.map
- });
- }
- */
-
 
 //region
 //======================================================================
@@ -597,6 +523,43 @@ function addLatLngFromCoordinates(coordinates, mapInfo) {
     });
     mapInfo.routeModel.points.push(new RoutePointModel(coordinates, "", "", ""))
 }
+
+var CoordinateUtils = {
+    /**
+     * Checks that aNumber lies in 'delta area' of baseNumber
+     * @param baseNumber {Number} Nonnull
+     * @param aNumber {Number} Nonnull
+     * @param delta {Number} Nonnull
+     * @return {Boolean}
+     */
+    "isAPointInDeltaArea": function (baseNumber, aNumber, delta) {
+        return ((baseNumber - delta) < aNumber && (baseNumber + delta) > aNumber);
+    },
+
+    /**
+     * Checks that aLanLng lies in square with center with baseLatLng and side 2*delta.
+     * @param baseLatLng {lat, lng} Nunnull
+     * @param aLatLng {lat, lng} Nunnull
+     * @param delta {lat, lng} Nunnull
+     */
+    "isLatAndLngInDeltaArea": function (baseLatLng, aLatLng, delta) {
+        return this.isAPointInDeltaArea(baseLatLng.lat, aLatLng.lat, delta) &&
+            this.isAPointInDeltaArea(baseLatLng.lng, aLatLng.lng, delta);
+    },
+
+    /**
+     * Calculate distance between point without taking into account an elevation parameter.
+     * @param pointA {lat, lng} Nonnull
+     * @param pointB {lat, lng} Nonnull
+     * @return {Number}
+     */
+    "flatDistanceBetweenLatLng": function (pointALatlng, pointBLatlng) {
+        var latitudeDiff = pointALatlng.lat - pointBLatlng.lat;
+        var longitudeDiff = pointALatlng.lng - pointBLatlng.lng;
+
+        return Math.sqrt((Math.pow(latitudeDiff, 2) + Math.pow(longitudeDiff, 2)));
+    }
+};
 //endregion
 
 /**
